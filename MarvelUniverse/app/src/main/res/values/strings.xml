@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Marvel Universe</string>
+    <string name="universe">UNIVERSE</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="log_in">LOG IN</string>
+    <string name="or">OR</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="facebook">LOGIN WITH FACEBOOK</string>
+    <string name="facebook_app_id">[APP_ID]</string> <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+    <string name="google">sign in with google</string>
+
 </resources>

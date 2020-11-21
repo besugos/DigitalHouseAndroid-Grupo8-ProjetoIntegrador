@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dim_60_sp">60sp</dimen>
+    <dimen name="dim_16_dp">16dp</dimen>
+    <dimen name="dim_minus_30_dp">-30dp</dimen>
+    <dimen name="dim_180_dp">180dp</dimen>
+    <dimen name="dim_230_dp">230dp</dimen>
+    <dimen name="dim_32_dp">32dp</dimen>
+    <dimen name="dim_8_dp">8dp</dimen>
+    <dimen name="dim_48_dp">48dp</dimen>
 </resources>
