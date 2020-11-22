@@ -7,7 +7,10 @@
     <string name="or">OR</string>
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="facebook">LOGIN WITH FACEBOOK</string>
-    <string name="facebook_app_id">[APP_ID]</string> <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+    <string name="facebook_app_id">[APP_ID]</string>
+    <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
     <string name="google">sign in with google</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

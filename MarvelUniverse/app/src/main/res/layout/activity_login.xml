@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/dim_16_dp"
+    android:id="@+id/main"
     tools:context=".login.view.LoginActivity">
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tfEmailLogin"
@@ -128,6 +130,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/colorMarvelRed"
         app:strokeWidth="2dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
