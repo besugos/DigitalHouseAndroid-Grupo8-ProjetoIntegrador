@@ -39,20 +39,20 @@ class CollectionFragment : Fragment() {
         TabLayoutMediator(tabLayout, _viewPager) {tab, position ->
             when (position) {
                 0 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_person_24)
-                    tab.text = "Characters"
+                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_person_outline_24)
+                    tab.text = "Heroes"
                 }
                 1 -> {
+                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_bookmark_border_24)
+                    tab.text = "Events"
+                }
+                2 -> {
                     tab.icon = resources.getDrawable(R.drawable.ic_baseline_menu_book_24)
                     tab.text = "Stories"
                 }
-                2 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_event_24)
-                    tab.text = "Events"
-                }
                 3 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_favorite_24)
-                    tab.text = "Favorites"
+                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_favorite_border_24)
+                    tab.text = "Fav's"
                 }
             }
 
