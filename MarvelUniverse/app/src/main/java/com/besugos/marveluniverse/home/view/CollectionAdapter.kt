@@ -2,6 +2,7 @@ package com.besugos.marveluniverse.home.view
 
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.util.EventLog
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
@@ -17,10 +18,10 @@ class CollectionAdapter(private val fragment: Fragment): FragmentStateAdapter(fr
                 fragment = CharactersFragment()
             }
             1 -> {
-                fragment = StoriesFragment()
+                fragment = EventsFragment()
             }
             2 -> {
-                fragment = EventsFragment()
+                fragment = StoriesFragment()
             }
             3 -> {
                 fragment = FavoritesFragment()

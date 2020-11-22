@@ -8,4 +8,5 @@
     <color name="facebookBlue">#1875EB</color>
     <color name="googleBlue">#3883FD</color>
     <color name="colorTrans">#00EFF2F7</color>
+    <color name="colorTabLayout">#F95F62</color>
 </resources>
