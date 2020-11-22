@@ -1,4 +1,5 @@
 package com.besugos.marveluniverse.login.view
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
             // on back button press, it will navigate to parent activity
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-    }
+        }
 
         btnSignUp.setOnClickListener() {
             val intent = Intent(this, MainActivity::class.java)
@@ -39,5 +40,5 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, TermsActivity::class.java)
             startActivity(intent)
         }
-}
+    }
 }

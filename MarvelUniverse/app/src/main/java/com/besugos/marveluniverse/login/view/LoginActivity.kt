@@ -4,11 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toolbar
 import com.besugos.marveluniverse.MainActivity
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.view.CollectionFragment
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +15,8 @@ class LoginActivity : AppCompatActivity() {
 
         val btnLogin = this.findViewById<Button>(R.id.btnLoginLogin)
         val btnRegister = this.findViewById<Button>(R.id.btnCreateAccount)
+        val btnGoogle = this.findViewById<Button>(R.id.btnGoogleLogin)
+        val btnFacebook = this.findViewById<Button>(R.id.btnFacebookLogin)
         val toolbar = this.findViewById<androidx.appcompat.widget.Toolbar>(R.id.loginToolbar)
 
         setSupportActionBar(toolbar).apply {
@@ -31,6 +30,16 @@ class LoginActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener() {
             val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnGoogle.setOnClickListener() {
+            val intent = Intent(this, GoogleLoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnFacebook.setOnClickListener() {
+            val intent = Intent(this, FacebookLoginActivity::class.java)
             startActivity(intent)
         }
 
