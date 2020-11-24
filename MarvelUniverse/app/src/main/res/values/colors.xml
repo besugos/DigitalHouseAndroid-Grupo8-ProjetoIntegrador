@@ -14,4 +14,5 @@
     <color name="gray">#333</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
+    <color name="backgroundDialog">#EFF2F7</color>
 </resources>
