@@ -17,6 +17,7 @@ class CollectionFragment : Fragment() {
 
     private lateinit var _demoCollectionAdapter: CollectionAdapter
     private lateinit var _viewPager: ViewPager2
+    private lateinit var tabLayout: TabLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +35,7 @@ class CollectionFragment : Fragment() {
         _viewPager = view.findViewById(R.id.pager)
         _viewPager.adapter = _demoCollectionAdapter
 
-        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
+        tabLayout = view.findViewById(R.id.tabLayout)
 
         TabLayoutMediator(tabLayout, _viewPager) {tab, position ->
             when (position) {
@@ -60,4 +61,9 @@ class CollectionFragment : Fragment() {
 
 
     }
+
+    fun setCollectionTab(index: Int){
+        if(tabLayout.selectedTabPosition != index) tabLayout.getTabAt(index)?.select()
+    }
+
 }
