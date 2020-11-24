@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Marvel Universe</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="universe">UNIVERSE</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
@@ -45,5 +47,12 @@
 
 \n\nYou acknowledge that you have read this Agreement and agree to all its terms and conditions. By accessing and using the Mobile Application and Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to access or use the Mobile Application and Services.
     </string>
+    <string name="log_out">Log out</string>
+    <string name="user_name">User</string>
+    <string name="user_email">user@mail.com</string>
+    <string name="heroes">Heroes</string>
+    <string name="favorites">Favorites</string>
+    <string name="stories">Stories</string>
+    <string name="events">Events</string>
 
 </resources>
