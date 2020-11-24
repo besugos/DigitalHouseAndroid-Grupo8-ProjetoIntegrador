@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Marvel Universe</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="universe">UNIVERSE</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
@@ -63,5 +65,10 @@
     <string name="event_name">Event name</string>
     <string name="event_description">Event description</string>
     <string name="characters">Characters</string>
+    <string name="log_out">Log out</string>
+    <string name="user_name">User</string>
+    <string name="user_email">user@mail.com</string>
+    <string name="heroes">Heroes</string>
+    <string name="favorites">Favorites</string>
 
 </resources>

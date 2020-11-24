@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@color/white" />
 
     <ImageView
         android:layout_width="@dimen/dim_200_dp"
@@ -55,7 +55,7 @@
                 android:id="@+id/etEmailFacebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
                 android:id="@+id/etPassFacebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +89,7 @@
             android:text="@string/facebook"
             android:textSize="@dimen/dim_16_sp"
             app:icon="@drawable/ic_facebook"
-            app:iconTint="@android:color/white"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

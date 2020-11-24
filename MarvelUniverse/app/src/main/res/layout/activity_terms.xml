@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/main"
     tools:context=".login.view.LoginActivity"
-    android:background="@android:color/white">
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,7 +16,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ToolbarTheme"
-        app:titleTextColor="@android:color/white"
+        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:elevation="4dp"

@@ -15,7 +15,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:titleTextColor="@android:color/white"
+        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:elevation="@dimen/dim_4_dp"
@@ -40,7 +40,7 @@
             android:id="@+id/etEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/white"
             android:inputType="textEmailAddress"
 
             />
@@ -61,7 +61,7 @@
             android:id="@+id/etPassLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/white"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +100,7 @@
         android:text="@string/facebook"
         android:textSize="@dimen/dim_16_sp"
         app:icon="@drawable/ic_facebook"
-        app:iconTint="@android:color/white"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnGoogleLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -135,7 +135,7 @@
         android:layout_marginBottom="@dimen/dim_8_dp"
         android:padding="@dimen/dim_16_dp"
         android:text="@string/create_account"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textSize="@dimen/dim_16_sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
