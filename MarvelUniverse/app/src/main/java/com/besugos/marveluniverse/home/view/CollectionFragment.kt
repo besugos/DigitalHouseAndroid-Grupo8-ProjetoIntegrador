@@ -35,7 +35,7 @@ class CollectionFragment : Fragment() {
 
         tabLayout = view.findViewById(R.id.tabLayout)
 
-        TabLayoutMediator(tabLayout, _viewPager) {tab, position ->
+        TabLayoutMediator(tabLayout, _viewPager) { tab, position ->
             when (position) {
                 0 -> {
                     tab.icon = resources.getDrawable(R.drawable.ic_baseline_person_outline_24)
@@ -60,8 +60,8 @@ class CollectionFragment : Fragment() {
 
     }
 
-    fun setCollectionTab(index: Int){
-        if(tabLayout.selectedTabPosition != index) tabLayout.getTabAt(index)?.select()
+    fun setCollectionTab(index: Int) {
+        if (tabLayout.selectedTabPosition != index) tabLayout.getTabAt(index)?.select()
     }
 
 }

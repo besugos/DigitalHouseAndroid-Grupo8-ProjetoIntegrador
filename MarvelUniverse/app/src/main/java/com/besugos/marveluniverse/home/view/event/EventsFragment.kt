@@ -43,7 +43,8 @@ class EventsFragment : Fragment() {
     }
 
 
-    fun createEvents(): MutableList<EventModel>{
+    fun createEvents(): MutableList<EventModel> {
+        _listEvent.clear()
         for (i in 1..10) {
             val event = EventModel(
                 i,
@@ -64,7 +65,6 @@ class EventsFragment : Fragment() {
         }
         return _listEvent
     }
-
 
 
 }

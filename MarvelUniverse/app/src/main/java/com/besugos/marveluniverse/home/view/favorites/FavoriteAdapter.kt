@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.FavoriteModel
 
-class FavoriteAdapter(private val context: Context, private var favorites: MutableList<FavoriteModel>) :
+class FavoriteAdapter(
+    private val context: Context,
+    private var favorites: MutableList<FavoriteModel>
+) :
     RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {

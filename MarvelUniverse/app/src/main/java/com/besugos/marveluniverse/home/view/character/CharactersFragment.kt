@@ -49,7 +49,8 @@ class CharactersFragment : Fragment() {
     }
 
 
-    fun createCharacthers(): MutableList<CharacterModel>{
+    fun createCharacthers(): MutableList<CharacterModel> {
+
         for (i in 1..10) {
             val hero = CharacterModel(
                 i,

@@ -7,7 +7,7 @@ import com.besugos.marveluniverse.home.view.event.EventsFragment
 import com.besugos.marveluniverse.home.view.favorites.FavoritesFragment
 import com.besugos.marveluniverse.home.view.story.StoriesFragment
 
-class CollectionAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+class CollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 4
 
     override fun createFragment(position: Int): Fragment {

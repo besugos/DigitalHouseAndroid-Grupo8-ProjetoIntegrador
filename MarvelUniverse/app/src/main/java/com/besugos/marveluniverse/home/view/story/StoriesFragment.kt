@@ -41,7 +41,8 @@ class StoriesFragment : Fragment() {
         }
     }
 
-    fun createStories(): MutableList<StoryModel>{
+    fun createStories(): MutableList<StoryModel> {
+        _listStory.clear()
         for (i in 1..10) {
             val story = StoryModel(
                 i,

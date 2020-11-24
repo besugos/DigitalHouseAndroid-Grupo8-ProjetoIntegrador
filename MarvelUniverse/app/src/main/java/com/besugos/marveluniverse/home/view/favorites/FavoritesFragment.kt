@@ -42,11 +42,12 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    fun createFavorites(): MutableList<FavoriteModel>{
+    fun createFavorites(): MutableList<FavoriteModel> {
+        _listFavorites.clear()
         for (i in 1..10) {
             val favorite = FavoriteModel(
                 i,
-                "Favorites $i"
+                "Favorites  $i"
             )
             _listFavorites.add(favorite)
         }

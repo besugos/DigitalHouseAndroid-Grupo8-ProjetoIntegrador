@@ -8,7 +8,10 @@ import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.CharacterModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class CharactersAdapter(private val context: Context, private var heros: MutableList<CharacterModel>) :
+class CharactersAdapter(
+    private val context: Context,
+    private var heros: MutableList<CharacterModel>
+) :
     RecyclerView.Adapter<CharactersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
