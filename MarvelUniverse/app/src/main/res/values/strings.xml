@@ -48,6 +48,7 @@
     <string name="avatar_hero">avatar hero</string>
     <string name="spider_man">Spider Man</string>
     <string name="characters_short_description">Character %1$d short description</string>
+    <string name="characters_image">%1$s.%2$s</string>
     <string name="events_short_description">Event %1$d short description</string>
     <string name="favorites_short_description">Favorite %1$d short description</string>
     <string name="stories_short_description">Storie %1$d short description</string>
@@ -58,5 +59,9 @@
     <string name="events">Events</string>
     <string name="comics">Comics</string>
     <string name="creators">Creators</string>
+    <string name="stories">Stories</string>
+    <string name="event_name">Event name</string>
+    <string name="event_description">Event description</string>
+    <string name="characters">Characters</string>
 
 </resources>

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|center"
-    app:cardCornerRadius="8dp"
+    android:layout_marginRight="@dimen/dim_5_dp"
+    android:layout_marginLeft="@dimen/dim_5_dp"
+    app:cardCornerRadius="16dp"
     app:cardBackgroundColor="@color/white">
 
    <ScrollView
@@ -44,11 +46,14 @@
                    android:gravity="end"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:clickable="true"
                    app:srcCompat="@drawable/ic_action_favorite_border"
-                   android:contentDescription="@string/icon_heart" />
+                   android:contentDescription="@string/icon_heart"
+                   android:focusable="true" />
            </LinearLayout>
 
            <TextView
+               android:id="@+id/txtYearDetails"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                tools:text="@string/start_year_end_year"
@@ -68,6 +73,7 @@
                app:srcCompat="@drawable/img1" />
 
            <TextView
+               android:id="@+id/txtDescriptionCharacterDetails"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                tools:text="@string/character_description"
@@ -77,42 +83,38 @@
                android:layout_marginStart="@dimen/dim_8_dp"
                android:layout_marginEnd="@dimen/dim_8_dp"
                android:layout_marginTop="@dimen/dim_25_dp"
-               android:layout_marginBottom="@dimen/dim_35_dp"/>
+               android:layout_marginBottom="@dimen/dim_35_dp" />
 
            <TextView
+               android:id="@+id/txtEventCharacterDetails"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               tools:text="events"
+               tools:text="@string/events"
                android:text="@string/events"
                android:textSize="@dimen/dim_20_sp"
                android:textColor="@color/black"
+               android:clickable="true"
+               android:focusable="true"
                android:layout_marginStart="@dimen/dim_8_dp"
                android:layout_marginEnd="@dimen/dim_8_dp"
                android:layout_marginBottom="@dimen/dim_35_dp"/>
 
            <TextView
+               android:id="@+id/txtStoryCharacterDetails"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               tools:text="events"
-               android:text="@string/comics"
+               tools:text="@string/stories"
+               android:text="@string/stories"
                android:textSize="@dimen/dim_20_sp"
                android:textColor="@color/black"
+               android:clickable="true"
+               android:focusable="true"
                android:layout_marginStart="@dimen/dim_8_dp"
                android:layout_marginEnd="@dimen/dim_8_dp"
                android:layout_marginBottom="@dimen/dim_35_dp"/>
 
 
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               tools:text="events"
-               android:text="@string/creators"
-               android:textSize="@dimen/dim_20_sp"
-               android:textColor="@color/black"
-               android:layout_marginStart="@dimen/dim_8_dp"
-               android:layout_marginEnd="@dimen/dim_8_dp"
-               android:layout_marginBottom="@dimen/dim_35_dp"/>
 
        </LinearLayout>
    </ScrollView>

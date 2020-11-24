@@ -46,7 +46,7 @@ class FavoritesFragment : Fragment() {
         for (i in 1..10) {
             val favorite = FavoriteModel(
                 i,
-                "Event $i"
+                "Favorites $i"
             )
             _listFavorites.add(favorite)
         }

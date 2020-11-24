@@ -3,7 +3,7 @@ package com.besugos.marveluniverse.home.model
 import java.io.Serializable
 import java.util.*
 
-data class CharacterModel (
+data class CharacterModel(
     val id: Int?,
     val name: String?,
     val description: String?,
@@ -12,5 +12,6 @@ data class CharacterModel (
     val url: UrlModel?,
     val thumbnail: ImageModel?,
     val stories: StoryListModel?,
-    val events: EventListModel?
-): Serializable
+    val events: EventListModel?,
+    var fav: Boolean = false
+) : Serializable

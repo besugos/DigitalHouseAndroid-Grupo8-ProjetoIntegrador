@@ -45,7 +45,7 @@ class StoriesFragment : Fragment() {
         for (i in 1..10) {
             val story = StoryModel(
                 i,
-                "Favorite $i",
+                "Stories $i",
                 null,
                 null,
                 null,
