@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@color/white" />
 
     <ImageView
         android:layout_width="@dimen/dim_200_dp"
@@ -55,7 +55,7 @@
                 android:id="@+id/etEmailGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
                 android:id="@+id/etPassGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/white"
+            android:backgroundTint="@color/white"
             android:elevation="@dimen/dim_3_dp"
             android:padding="@dimen/dim_16_dp"
             android:text="@string/google"

@@ -13,7 +13,7 @@ data class EventModel (
     val end: Date,
     val thumbnail: ImageModel,
     val stories: StoryListModel,
-    val characters: CharacterListModel,
-    val next: EventSummaryModel,
-    val previous: EventSummaryModel
+    val characters: CharacterListModel
+//    val next: EventSummaryModel,
+//    val previous: EventSummaryModel
 )
