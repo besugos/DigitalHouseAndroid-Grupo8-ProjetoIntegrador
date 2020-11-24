@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".login.view.LoginActivity">
 
@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:id="@+id/etNameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -59,7 +59,7 @@
                 android:id="@+id/etEmailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
                 android:id="@+id/etPassRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +97,7 @@
                 android:id="@+id/etRptPassRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/white"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -119,7 +119,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/terms_of_use"
-            android:textColor="@android:color/black"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/cbTerms"
             app:layout_constraintStart_toEndOf="@id/cbTerms"
             app:layout_constraintTop_toTopOf="@+id/cbTerms" />

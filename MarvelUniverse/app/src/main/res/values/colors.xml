@@ -11,4 +11,6 @@
     <color name="colorTabLayout">#F95F62</color>
     <color name="googleText">#666</color>
     <color name="googleStroke">#DDD</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
 </resources>
