@@ -59,6 +59,8 @@ class CollectionFragment : Fragment() {
 
         }.attach()
 
+        val index = arguments?.getInt("INDEX", 0)
+        if(index != null) setCollectionTab(index)
 
     }
 
