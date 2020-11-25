@@ -13,12 +13,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.besugos.marveluniverse.home.view.CollectionFragment
 import com.besugos.marveluniverse.login.view.LoginActivity
 
+const val TAG_COLLECTION_FRAGMENT = "MAIN"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var mainToolbar: androidx.appcompat.widget.Toolbar
     private lateinit var btnLogout: Button
-    private val collectionFragment = CollectionFragment()
+    private var collectionFragment = CollectionFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +31,10 @@ class MainActivity : AppCompatActivity() {
         btnLogout = findViewById(R.id.btnLogout)
 
         setSupportActionBar(mainToolbar)
-        initializeToggle()
+        initializeDrawer()
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment, collectionFragment,"MAIN").commit()
+            .replace(R.id.fragment, collectionFragment, TAG_COLLECTION_FRAGMENT).commit()
 
         btnLogout.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -50,11 +52,29 @@ class MainActivity : AppCompatActivity() {
     private fun initializeButtonListenerToSetCollectionTab(buttonId: Int, tabPosition: Int) {
         findViewById<Button>(buttonId).setOnClickListener {
             collectionFragment.setCollectionTab(tabPosition)
+
+            val homeFragment = supportFragmentManager.findFragmentByTag(TAG_COLLECTION_FRAGMENT)
+
+            if (homeFragment != null && homeFragment.isVisible) {
+                collectionFragment.setCollectionTab(tabPosition)
+            } else {
+
+                val args = Bundle()
+                args.putInt("INDEX", tabPosition)
+
+                collectionFragment = CollectionFragment()
+                collectionFragment.arguments = args
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment, collectionFragment, TAG_COLLECTION_FRAGMENT).commit()
+
+            }
+
             drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
 
-    private fun initializeToggle() {
+    private fun initializeDrawer() {
 
         val toggle = object : ActionBarDrawerToggle(
             this,
@@ -98,4 +118,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-//supportFragmentManager.findFragmentByTag("MAIN")
