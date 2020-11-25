@@ -53,10 +53,7 @@ class CharactersViewHolder(val context: Context, view: View) : RecyclerView.View
             layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails).text =
                 characterModel.description
 
-            val event = layoutView.findViewById<TextView>(R.id.txtEventCharacterDetails)
-            val story = layoutView.findViewById<TextView>(R.id.txtStoryCharacterDetails)
             val fav = layoutView.findViewById<ImageView>(R.id.imgFavoriteCharacterDetails)
-//            Picasso.get().load(R.drawable.img1).into(layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails))
 
             if (characterModel.fav) {
                 fav.setBackgroundResource(R.drawable.ic_action_favorite)
@@ -69,21 +66,6 @@ class CharactersViewHolder(val context: Context, view: View) : RecyclerView.View
                 show()
             }
 
-            event.setOnClickListener {
-                alertaDialog.dismiss()
-                val activity = view.context as AppCompatActivity
-                val myFragment: Fragment = EventsFragment()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment, myFragment).addToBackStack(null).commit()
-
-//                activity.supportFragmentManager.beginTransaction()
-//                    .replace(R.id.fragment, CollectionFragment()).commit()
-
-            }
-            story.setOnClickListener {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-            }
-//
             fav.setOnClickListener {
                 if (characterModel.fav) {
                     fav.setBackgroundResource(R.drawable.ic_action_favorite_border)

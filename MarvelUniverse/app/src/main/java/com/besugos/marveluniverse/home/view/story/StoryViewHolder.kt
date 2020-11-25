@@ -42,32 +42,12 @@ class StoryViewHolder(val context: Context, view: View) : RecyclerView.ViewHolde
             val layoutView = inflater.inflate(R.layout.stories_detail, null)
             val alertaDialog = BottomSheetDialog(context)
 
-
             layoutView.findViewById<TextView>(R.id.txtNameStoriesDetails).text =
                 storyModel.title
-
-            val character = layoutView.findViewById<TextView>(R.id.txtCharacterStoriesDetails)
-            val event = layoutView.findViewById<TextView>(R.id.txtEventStoriesDetails)
-//            Picasso.get().load(R.drawable.img1).into(layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails))
 
             alertaDialog.apply {
                 setContentView(layoutView)
                 show()
-            }
-
-            character.setOnClickListener {
-                alertaDialog.dismiss()
-                val activity = view.context as AppCompatActivity
-                val myFragment: Fragment = CharactersFragment()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment, myFragment).addToBackStack(null).commit()
-
-//                activity.supportFragmentManager.beginTransaction()
-//                    .replace(R.id.fragment, CollectionFragment()).commit()
-
-            }
-            event.setOnClickListener {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
             }
         }
     }

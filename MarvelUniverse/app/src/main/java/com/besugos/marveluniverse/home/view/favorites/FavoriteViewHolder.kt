@@ -43,38 +43,14 @@ class FavoriteViewHolder(val context: Context, view: View) : RecyclerView.ViewHo
             val layoutView = inflater.inflate(R.layout.favorites_detail, null)
             val alertaDialog = BottomSheetDialog(context)
 
-
             layoutView.findViewById<TextView>(R.id.txtNameFavoritesDetails).text =
                 favoriteModel.name
-
-
-            val character = layoutView.findViewById<TextView>(R.id.txtCharacterFavoritesDetails)
-            val event = layoutView.findViewById<TextView>(R.id.txtEventFavoritesDetails)
-            val story = layoutView.findViewById<TextView>(R.id.txtEventStoriesDetails)
-//            Picasso.get().load(R.drawable.img1).into(layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails))
 
             alertaDialog.apply {
                 setContentView(layoutView)
                 show()
             }
 
-            character.setOnClickListener {
-                alertaDialog.dismiss()
-                val activity = view.context as AppCompatActivity
-                val myFragment: Fragment = CharactersFragment()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment, myFragment).addToBackStack(null).commit()
-
-//                activity.supportFragmentManager.beginTransaction()
-//                    .replace(R.id.fragment, CollectionFragment()).commit()
-
-            }
-            event.setOnClickListener {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-            }
-            story.setOnClickListener {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
