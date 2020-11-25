@@ -7,7 +7,7 @@ import java.util.*
 class CharacterDataBase {
 
     companion object {
-        val characters = listOf(CharacterModel(1,
+        val characters = mutableListOf(CharacterModel(1,
                 "Abyss (Age of Apocalypse)",
                 "Abyss is a Marvel Character",
                 Date(), "http://gateway.marvel.com/v1/public/characters/1011266",

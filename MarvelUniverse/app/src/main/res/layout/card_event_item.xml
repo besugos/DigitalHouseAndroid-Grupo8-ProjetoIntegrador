@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dim_10_dp"
+        android:layout_marginEnd="@dimen/dim_10_dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/dim_10_dp">
+
+        <ImageView
+            android:id="@+id/imgAvatarEventCard"
+            android:layout_width="@dimen/dim_60_dp"
+            android:layout_height="@dimen/dim_60_dp"
+            android:contentDescription="@string/avatar_hero"
+            tools:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dim_30_dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/txtNameEventCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim_8_dp"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dim_18_sp"
+                tools:text="@string/spider_man" />
+
+            <TextView
+                android:id="@+id/txtEventCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dim_18_sp"
+                tools:text="Event 1 short description" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

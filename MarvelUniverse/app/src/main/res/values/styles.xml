@@ -33,5 +33,9 @@
     </style>
 
 
+    <style name="Details" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundDimAmount">0.8</item>
+    </style>
+
 
 </resources>

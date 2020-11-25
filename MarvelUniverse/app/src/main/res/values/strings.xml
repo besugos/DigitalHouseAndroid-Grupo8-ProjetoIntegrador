@@ -47,12 +47,28 @@
 
 \n\nYou acknowledge that you have read this Agreement and agree to all its terms and conditions. By accessing and using the Mobile Application and Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to access or use the Mobile Application and Services.
     </string>
+    <string name="avatar_hero">avatar hero</string>
+    <string name="spider_man">Spider Man</string>
+    <string name="characters_short_description">Character %1$d short description</string>
+    <string name="characters_image">%1$s.%2$s</string>
+    <string name="events_short_description">Event %1$d short description</string>
+    <string name="favorites_short_description">Favorite %1$d short description</string>
+    <string name="stories_short_description">Storie %1$d short description</string>
+    <string name="icon_heart">icon heart</string>
+    <string name="character_name">Character name</string>
+    <string name="start_year_end_year">Start year - End year</string>
+    <string name="character_description">Character description</string>
+    <string name="events">Events</string>
+    <string name="comics">Comics</string>
+    <string name="creators">Creators</string>
+    <string name="stories">Stories</string>
+    <string name="event_name">Event name</string>
+    <string name="event_description">Event description</string>
+    <string name="characters">Characters</string>
     <string name="log_out">Log out</string>
     <string name="user_name">User</string>
     <string name="user_email">user@mail.com</string>
     <string name="heroes">Heroes</string>
     <string name="favorites">Favorites</string>
-    <string name="stories">Stories</string>
-    <string name="events">Events</string>
 
 </resources>

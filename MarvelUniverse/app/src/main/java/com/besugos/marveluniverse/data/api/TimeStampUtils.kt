@@ -2,7 +2,7 @@ package com.besugos.marveluniverse.data.api
 
 class TimeStampUtils {
 
-     fun currentTimeMilliSeconds(): Long {
+    fun currentTimeMilliSeconds(): Long {
         return System.currentTimeMillis()
     }
 

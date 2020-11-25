@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center"
+    android:layout_marginLeft="@dimen/dim_5_dp"
+    android:layout_marginRight="@dimen/dim_5_dp"
+    app:cardCornerRadius="@dimen/dim_16_dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundDialog"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_8_dp"
+                android:layout_marginTop="@dimen/dim_25_dp"
+                android:layout_marginEnd="@dimen/dim_8_dp"
+                android:layout_marginBottom="@dimen/dim_5_dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtNameCharacterDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/character_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dim_20_sp"
+                    android:textStyle="bold"
+                    tools:text="@string/character_name" />
+
+                <ImageView
+                    android:id="@+id/imgFavoriteCharacterDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contentDescription="@string/icon_heart"
+                    android:focusable="true"
+                    android:gravity="end"
+                    app:srcCompat="@drawable/ic_action_favorite_border" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtYearDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_8_dp"
+                android:layout_marginEnd="@dimen/dim_8_dp"
+                android:layout_marginBottom="@dimen/dim_25_dp"
+                android:text="@string/start_year_end_year"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dim_20_sp"
+                tools:text="@string/start_year_end_year" />
+
+            <ImageView
+                android:id="@+id/imgAvatarCharacterDetails"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:contentDescription="@string/avatar_hero"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/img1" />
+
+            <TextView
+                android:id="@+id/txtDescriptionCharacterDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_8_dp"
+                android:layout_marginTop="@dimen/dim_25_dp"
+                android:layout_marginEnd="@dimen/dim_8_dp"
+                android:layout_marginBottom="@dimen/dim_35_dp"
+                android:text="@string/character_description"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dim_20_sp"
+                tools:text="@string/character_description" />
+
+            <TextView
+                android:id="@+id/txtEventCharacterDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_8_dp"
+                android:layout_marginEnd="@dimen/dim_8_dp"
+                android:layout_marginBottom="@dimen/dim_35_dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/events"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dim_20_sp"
+                tools:text="@string/events" />
+
+            <TextView
+                android:id="@+id/txtStoryCharacterDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_8_dp"
+                android:layout_marginEnd="@dimen/dim_8_dp"
+                android:layout_marginBottom="@dimen/dim_35_dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/stories"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dim_20_sp"
+                tools:text="@string/stories" />
+        </LinearLayout>
+    </ScrollView>
+
+</com.google.android.material.card.MaterialCardView>
