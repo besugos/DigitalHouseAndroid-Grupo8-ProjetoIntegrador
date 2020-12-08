@@ -1,15 +1,12 @@
-package com.besugos.marveluniverse.home.view.character
+package com.besugos.marveluniverse.character.view
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.model.CharacterModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.besugos.marveluniverse.character.model.CharacterModel
 
 class CharactersAdapter(
-    private val context: Context,
     private var heros: MutableList<CharacterModel>
 ) :
     RecyclerView.Adapter<CharactersViewHolder>() {
@@ -17,7 +14,9 @@ class CharactersAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_character_item, parent, false)
-        return CharactersViewHolder(context, view)
+        return CharactersViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {

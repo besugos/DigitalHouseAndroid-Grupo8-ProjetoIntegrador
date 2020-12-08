@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.view.story.StoriesFragment">
+    tools:context=".story.view.StoriesFragment">
 
     <LinearLayout
         android:id="@+id/linearSearchViewStory"
