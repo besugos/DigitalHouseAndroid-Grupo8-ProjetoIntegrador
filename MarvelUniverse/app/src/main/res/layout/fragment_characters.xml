@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".character.view.CharactersFragment">
+    tools:context=".home.view.character.CharactersFragment">
 
     <LinearLayout
         android:id="@+id/linearSearchViewCharacter"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <SearchView
-            android:id="@+id/searchCharacter"
+            android:id="@+id/searchViewCharacter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dim_8_dp"
@@ -41,52 +41,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearSearchViewCharacter" />
-
-    <LinearLayout
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutNotFound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:layout_width="@dimen/dim_200_dp"
-            android:layout_height="@dimen/dim_200_dp"
-            android:src="@drawable/ic_baseline_mood_bad_24"
-            android:contentDescription="@string/not_found_image" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dim_15_dp"
-            android:textSize="@dimen/dim_20_sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorMarvelRed"
-            android:text="@string/ops_nothing_found"/>
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

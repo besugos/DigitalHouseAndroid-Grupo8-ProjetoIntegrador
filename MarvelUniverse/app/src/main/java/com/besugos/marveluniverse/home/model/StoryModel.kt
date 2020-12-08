@@ -1,8 +1,5 @@
-package com.besugos.marveluniverse.story.model
+package com.besugos.marveluniverse.home.model
 
-import com.besugos.marveluniverse.home.model.CharacterListModel
-import com.besugos.marveluniverse.home.model.EventListModel
-import com.besugos.marveluniverse.home.model.ImageModel
 import java.io.Serializable
 import java.util.*
 

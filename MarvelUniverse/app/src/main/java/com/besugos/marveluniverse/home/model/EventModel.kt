@@ -1,6 +1,5 @@
-package com.besugos.marveluniverse.event.model
+package com.besugos.marveluniverse.home.model
 
-import com.besugos.marveluniverse.home.model.*
 import java.io.Serializable
 import java.util.*
 
