@@ -70,7 +70,5 @@
     <string name="user_email">user@mail.com</string>
     <string name="heroes">Heroes</string>
     <string name="favorites">Favorites</string>
-    <string name="ops_nothing_found">Ops! Nothing found</string>
-    <string name="not_found_image">not found image</string>
 
 </resources>

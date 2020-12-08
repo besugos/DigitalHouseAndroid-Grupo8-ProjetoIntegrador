@@ -1,6 +1,5 @@
 package com.besugos.marveluniverse.home.datamockup
 
-import com.besugos.marveluniverse.event.model.EventModel
 import com.besugos.marveluniverse.home.model.*
 import java.util.*
 

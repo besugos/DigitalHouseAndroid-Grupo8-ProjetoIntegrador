@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.story.view
+package com.besugos.marveluniverse.home.view.story
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.story.model.StoryModel
+import com.besugos.marveluniverse.home.model.StoryModel
 
 
 class StoriesFragment : Fragment() {
@@ -33,10 +33,7 @@ class StoriesFragment : Fragment() {
 
         _view = view
 
-        _adapter = StoryAdapter(
-            requireContext(),
-            _listStory
-        )
+        _adapter = StoryAdapter(requireContext(), _listStory)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = manager
