@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.home.view.event
+package com.besugos.marveluniverse.event.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.model.EventModel
+import com.besugos.marveluniverse.event.model.EventModel
 
 
 class EventsFragment : Fragment() {
@@ -33,7 +33,10 @@ class EventsFragment : Fragment() {
 
         _view = view
 
-        _adapter = EventAdapter(requireContext(), _listEvent)
+        _adapter = EventAdapter(
+            requireContext(),
+            _listEvent
+        )
 
         recyclerView.apply {
             setHasFixedSize(true)
