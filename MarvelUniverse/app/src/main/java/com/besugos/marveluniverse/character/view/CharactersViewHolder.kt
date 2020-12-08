@@ -1,23 +1,19 @@
-package com.besugos.marveluniverse.home.view.character
+package com.besugos.marveluniverse.character.view
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.model.CharacterModel
-import com.besugos.marveluniverse.home.view.event.EventsFragment
+import com.besugos.marveluniverse.character.model.CharacterModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 
-class CharactersViewHolder(val context: Context, view: View) : RecyclerView.ViewHolder(view) {
+class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private var name = view.findViewById<TextView>(R.id.txtNameCharacterCard)
     private val description = view.findViewById<TextView>(R.id.txtCharecterCard)
@@ -29,7 +25,7 @@ class CharactersViewHolder(val context: Context, view: View) : RecyclerView.View
         characterModel = hero
         name.text = characterModel.name
         description.text = characterModel.description
-        val imgUrl = context.getString(
+        val imgUrl = itemView.context.getString(
             R.string.characters_image,
             characterModel.thumbnail?.path,
             characterModel.thumbnail?.extension
@@ -42,10 +38,10 @@ class CharactersViewHolder(val context: Context, view: View) : RecyclerView.View
 
     init {
         view.setOnClickListener {
-            val inflater = context
+            val inflater = itemView.context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val layoutView = inflater.inflate(R.layout.character_detail, null)
-            val alertaDialog = BottomSheetDialog(context)
+            val alertaDialog = BottomSheetDialog(itemView.context)
 
 
             layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails).text =
