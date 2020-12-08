@@ -1,11 +1,11 @@
-package com.besugos.marveluniverse.home.view.event
+package com.besugos.marveluniverse.event.view
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.model.EventModel
+import com.besugos.marveluniverse.event.model.EventModel
 
 class EventAdapter(private val context: Context, private var events: MutableList<EventModel>) :
     RecyclerView.Adapter<EventViewHolder>() {
@@ -13,7 +13,10 @@ class EventAdapter(private val context: Context, private var events: MutableList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_event_item, parent, false)
-        return EventViewHolder(context, view)
+        return EventViewHolder(
+            context,
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {

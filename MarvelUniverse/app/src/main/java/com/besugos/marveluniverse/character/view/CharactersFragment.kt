@@ -64,7 +64,7 @@ class CharactersFragment : Fragment() {
 
         _viewModel = ViewModelProvider(
             this,
-            CharacterViewModel.ComicViewModelFactory(CharacterRepository())
+            CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
         _viewModel.getCharacters().observe(viewLifecycleOwner, Observer {

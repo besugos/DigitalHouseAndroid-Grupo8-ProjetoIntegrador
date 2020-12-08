@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.home.view.story
+package com.besugos.marveluniverse.story.view
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.model.StoryModel
+import com.besugos.marveluniverse.story.model.StoryModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
