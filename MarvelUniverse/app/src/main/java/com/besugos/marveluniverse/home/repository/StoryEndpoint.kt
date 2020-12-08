@@ -2,7 +2,6 @@ package com.besugos.marveluniverse.home.repository
 
 import com.besugos.marveluniverse.data.api.NetworkUtils
 import com.besugos.marveluniverse.data.model.ResponseModel
-import com.besugos.marveluniverse.home.model.CharacterModel
 import com.besugos.marveluniverse.home.model.StoryModel
 import retrofit2.http.GET
 import retrofit2.http.Query
