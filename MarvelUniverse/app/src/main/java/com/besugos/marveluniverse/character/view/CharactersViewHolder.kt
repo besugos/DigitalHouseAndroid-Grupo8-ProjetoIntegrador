@@ -24,7 +24,11 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(hero: CharacterModel) {
         characterModel = hero
         name.text = characterModel.name
-        description.text = characterModel.description
+        if (characterModel.description.isNullOrEmpty()){
+            description.text = "Oops, no description for this hero :("
+        } else {
+            description.text = characterModel.description
+        }
         val imgUrl = characterModel.thumbnail!!.getThumb("standard_small")
 
         Picasso.get()
