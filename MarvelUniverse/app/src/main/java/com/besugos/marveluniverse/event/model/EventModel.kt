@@ -9,7 +9,7 @@ data class EventModel (
     val title: String?,
     val description: String?,
     val resourceURI: String?,
-    val urls: UrlModel?,
+    val urls: List<UrlModel>?,
     val modified: Date?,
     val start: Date?,
     val end: Date?,

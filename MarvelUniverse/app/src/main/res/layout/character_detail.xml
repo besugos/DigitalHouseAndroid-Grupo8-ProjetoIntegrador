@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_8_dp"
-                android:layout_marginTop="@dimen/dim_25_dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/dim_8_dp"
                 android:layout_marginBottom="@dimen/dim_5_dp"
                 android:orientation="horizontal">
@@ -51,17 +51,17 @@
                     app:srcCompat="@drawable/ic_action_favorite_border" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtYearDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_8_dp"
-                android:layout_marginEnd="@dimen/dim_8_dp"
-                android:layout_marginBottom="@dimen/dim_25_dp"
-                android:text="@string/start_year_end_year"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dim_20_sp"
-                tools:text="@string/start_year_end_year" />
+<!--            <TextView-->
+<!--                android:id="@+id/txtYearDetails"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/dim_8_dp"-->
+<!--                android:layout_marginEnd="@dimen/dim_8_dp"-->
+<!--                android:layout_marginBottom="@dimen/dim_25_dp"-->
+<!--                android:text="@string/start_year_end_year"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="@dimen/dim_20_sp"-->
+<!--                tools:text="@string/start_year_end_year" />-->
 
             <ImageView
                 android:id="@+id/imgAvatarCharacterDetails"
@@ -69,7 +69,7 @@
                 android:layout_height="250dp"
                 android:contentDescription="@string/avatar_hero"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/img1" />
+                tools:src="@drawable/img1" />
 
             <TextView
                 android:id="@+id/txtDescriptionCharacterDetails"
