@@ -25,13 +25,10 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         characterModel = hero
         name.text = characterModel.name
         description.text = characterModel.description
-        val imgUrl = itemView.context.getString(
-            R.string.characters_image,
-            characterModel.thumbnail?.path,
-            characterModel.thumbnail?.extension
-        )
+        val imgUrl = characterModel.thumbnail!!.getThumb("standard_small")
+
         Picasso.get()
-            .load(R.drawable.img1)
+            .load(imgUrl)
             .transform(CropCircleTransformation())
             .into(avatar)
     }
