@@ -56,7 +56,7 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 characterDescription.text = characterModel.description
             }
 
-            val imgUrl = characterModel.thumbnail!!.getThumb("standard_large")
+            val imgUrl = characterModel.thumbnail!!.getThumb("standard_fantastic")
 
             val image = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
 

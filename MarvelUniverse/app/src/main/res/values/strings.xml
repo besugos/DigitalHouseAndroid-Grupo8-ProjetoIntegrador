@@ -72,5 +72,6 @@
     <string name="favorites">Favorites</string>
     <string name="ops_nothing_found">Ops! Nothing found</string>
     <string name="not_found_image">not found image</string>
+    <string name="ops_not_available">Oops, dates are not available for this one!</string>
 
 </resources>

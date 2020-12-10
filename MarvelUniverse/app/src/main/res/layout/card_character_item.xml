@@ -48,7 +48,7 @@
                 android:textColor="@color/colorLightGray"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="@dimen/dim_15_dp"
+                android:textSize="@dimen/dim_15_sp"
                 tools:text="Event 1 short description" />
         </LinearLayout>
 
