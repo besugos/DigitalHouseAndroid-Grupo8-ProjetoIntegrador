@@ -47,7 +47,7 @@ class CollectionFragment : Fragment() {
                 }
                 2 -> {
                     tab.icon = resources.getDrawable(R.drawable.ic_baseline_menu_book_24)
-                    tab.text = "Stories"
+                    tab.text = "Comics"
                 }
                 3 -> {
                     tab.icon = resources.getDrawable(R.drawable.ic_baseline_favorite_border_24)
