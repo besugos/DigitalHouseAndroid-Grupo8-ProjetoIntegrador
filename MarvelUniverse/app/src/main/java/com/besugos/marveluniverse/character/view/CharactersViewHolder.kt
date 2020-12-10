@@ -24,14 +24,15 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(hero: CharacterModel) {
         characterModel = hero
         name.text = characterModel.name
-        description.text = characterModel.description
-        val imgUrl = itemView.context.getString(
-            R.string.characters_image,
-            characterModel.thumbnail?.path,
-            characterModel.thumbnail?.extension
-        )
+        if (characterModel.description.isNullOrEmpty()){
+            description.text = "Oops, no description for this hero :("
+        } else {
+            description.text = characterModel.description
+        }
+        val imgUrl = characterModel.thumbnail!!.getThumb("standard_small")
+
         Picasso.get()
-            .load(R.drawable.img1)
+            .load(imgUrl)
             .transform(CropCircleTransformation())
             .into(avatar)
     }
