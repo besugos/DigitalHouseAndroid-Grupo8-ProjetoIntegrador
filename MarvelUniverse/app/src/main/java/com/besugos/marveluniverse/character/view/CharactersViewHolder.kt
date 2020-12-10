@@ -24,14 +24,15 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(hero: CharacterModel) {
         characterModel = hero
         name.text = characterModel.name
-        description.text = characterModel.description
-        val imgUrl = itemView.context.getString(
-            R.string.characters_image,
-            characterModel.thumbnail?.path,
-            characterModel.thumbnail?.extension
-        )
+        if (characterModel.description.isNullOrEmpty()){
+            description.text = "Oops, no description for this hero :("
+        } else {
+            description.text = characterModel.description
+        }
+        val imgUrl = characterModel.thumbnail!!.getThumb("standard_small")
+
         Picasso.get()
-            .load(R.drawable.img1)
+            .load(imgUrl)
             .transform(CropCircleTransformation())
             .into(avatar)
     }
@@ -43,11 +44,25 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val layoutView = inflater.inflate(R.layout.character_detail, null)
             val alertaDialog = BottomSheetDialog(itemView.context)
 
+            val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
 
-            layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails).text =
-                characterModel.name
-            layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails).text =
-                characterModel.description
+            characterName.text = characterModel.name
+
+            val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
+
+            if (characterModel.description.isNullOrEmpty()){
+                characterDescription.text  = "Oops, no description for this hero :("
+            } else {
+                characterDescription.text = characterModel.description
+            }
+
+            val imgUrl = characterModel.thumbnail!!.getThumb("standard_fantastic")
+
+            val image = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
+
+            Picasso.get()
+                .load(imgUrl)
+                .into(image)
 
             val fav = layoutView.findViewById<ImageView>(R.id.imgFavoriteCharacterDetails)
 
