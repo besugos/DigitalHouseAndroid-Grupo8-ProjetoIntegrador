@@ -97,15 +97,15 @@ class LoginActivity : AppCompatActivity() {
         var response = true
 
         if (etEmail.text.isNullOrBlank()) {
-            tfEmail.error = "Campo de e-mail vazio"
+            tfEmail.error = "Please type your e-mail"
             response = false
         }
 
         if (etPass.text.isNullOrBlank()) {
-            tfPass.error = "Campo de senha vazio"
+            tfPass.error = "Please type your password"
             response = false
         } else if (etPass.text!!.length < 8){
-            tfPass.error = "Senha deve ter ao menos 8 caracteres"
+            tfPass.error = "Password must be at least 8 characters long"
             response = false
         }
 
