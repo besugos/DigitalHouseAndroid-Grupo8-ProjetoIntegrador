@@ -30,7 +30,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txtNameEventrDetails"
+                    android:id="@+id/txtNameEventDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -43,7 +43,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/txtYearDetails"
+                android:id="@+id/txtEventYearDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim_8_dp"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:contentDescription="@string/avatar_hero"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/img2" />
 
             <TextView

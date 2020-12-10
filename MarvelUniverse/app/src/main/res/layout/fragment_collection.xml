@@ -16,8 +16,8 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIconTint="@color/colorLightGray"
-        app:tabTextColor="@color/colorLightGray"
+        app:tabIconTint="@color/white"
+        app:tabTextColor="@color/white"
         android:background="@color/colorMarvelRed"
         android:id="@+id/tabLayout"/>
 

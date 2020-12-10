@@ -7,16 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.event.model.EventModel
 
-class EventAdapter(private val context: Context, private var events: MutableList<EventModel>) :
+class EventAdapter(
+    private var events: MutableList<EventModel>
+) :
     RecyclerView.Adapter<EventViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_event_item, parent, false)
-        return EventViewHolder(
-            context,
-            view
-        )
+
+        return EventViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
