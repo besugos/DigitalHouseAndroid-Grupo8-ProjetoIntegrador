@@ -38,11 +38,6 @@ class EventsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerEvent)
-        val manager = LinearLayoutManager(view.context)
-
-        _view = view
-
         _view = view
         initialSearch()
         showLoading(true)

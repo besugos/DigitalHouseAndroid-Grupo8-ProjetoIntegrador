@@ -114,11 +114,11 @@
                 android:text="@string/events"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
             <Button
-                android:id="@+id/btnNavigateToStories"
+                android:id="@+id/btnNavigateToComics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="@string/stories"
+                android:text="@string/comics"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
             <Button
                 android:id="@+id/btnNavigateToFavs"

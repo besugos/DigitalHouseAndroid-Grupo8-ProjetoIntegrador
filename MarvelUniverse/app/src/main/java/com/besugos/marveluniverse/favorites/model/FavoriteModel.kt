@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.home.model
+package com.besugos.marveluniverse.favorites.model
 
 import java.io.Serializable
 import java.util.*

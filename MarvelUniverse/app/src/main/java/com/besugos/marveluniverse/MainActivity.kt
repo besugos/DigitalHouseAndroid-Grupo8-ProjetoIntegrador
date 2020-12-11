@@ -14,6 +14,7 @@ import com.besugos.marveluniverse.home.view.CollectionFragment
 import com.besugos.marveluniverse.login.view.LoginActivity
 
 const val TAG_COLLECTION_FRAGMENT = "MAIN"
+const val INDEX = "INDEX"
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         initializeButtonListenerToSetCollectionTab(R.id.btnNavigateToHeroes, 0)
         initializeButtonListenerToSetCollectionTab(R.id.btnNavigateToEvents, 1)
-        initializeButtonListenerToSetCollectionTab(R.id.btnNavigateToStories, 2)
+        initializeButtonListenerToSetCollectionTab(R.id.btnNavigateToComics, 2)
         initializeButtonListenerToSetCollectionTab(R.id.btnNavigateToFavs, 3)
 
     }
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             } else {
 
                 val args = Bundle()
-                args.putInt("INDEX", tabPosition)
+                args.putInt(INDEX, tabPosition)
 
                 collectionFragment = CollectionFragment()
                 collectionFragment.arguments = args

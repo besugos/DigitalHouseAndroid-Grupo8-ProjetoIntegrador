@@ -1,8 +1,11 @@
 package com.besugos.marveluniverse.event.model
 
-import com.besugos.marveluniverse.home.model.*
+import com.besugos.marveluniverse.data.model.ImageModel
+import com.besugos.marveluniverse.data.model.UrlModel
+import com.besugos.marveluniverse.home.model.CharacterListModel
+import com.besugos.marveluniverse.home.model.EventSummaryModel
+import com.besugos.marveluniverse.home.model.StoryListModel
 import java.io.Serializable
-import java.util.*
 
 data class EventModel (
     val id: Int?,
