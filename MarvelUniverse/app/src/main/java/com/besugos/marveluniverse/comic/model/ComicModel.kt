@@ -2,9 +2,8 @@ package com.besugos.marveluniverse.comic.model
 
 import com.besugos.marveluniverse.home.model.CharacterListModel
 import com.besugos.marveluniverse.home.model.EventListModel
-import com.besugos.marveluniverse.home.model.ImageModel
+import com.besugos.marveluniverse.data.model.ImageModel
 import java.io.Serializable
-import java.util.*
 
 data class ComicModel (
     val id: Int?,

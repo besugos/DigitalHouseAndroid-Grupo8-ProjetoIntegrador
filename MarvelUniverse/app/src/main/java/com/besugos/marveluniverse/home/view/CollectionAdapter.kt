@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.besugos.marveluniverse.character.view.CharactersFragment
 import com.besugos.marveluniverse.event.view.EventsFragment
-import com.besugos.marveluniverse.home.view.favorites.FavoritesFragment
+import com.besugos.marveluniverse.favorites.view.FavoritesFragment
 import com.besugos.marveluniverse.comic.view.ComicsFragment
 
 class CollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -28,7 +28,8 @@ class CollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
                     ComicsFragment()
             }
             3 -> {
-                fragment = FavoritesFragment()
+                fragment =
+                    FavoritesFragment()
             }
         }
 

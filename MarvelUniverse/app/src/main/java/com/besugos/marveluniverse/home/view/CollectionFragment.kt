@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.besugos.marveluniverse.R
 import com.google.android.material.tabs.TabLayout
@@ -38,19 +39,19 @@ class CollectionFragment : Fragment() {
         TabLayoutMediator(tabLayout, _viewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_person_outline_24)
+                    tab.icon = ContextCompat.getDrawable(view.context, R.drawable.ic_baseline_person_outline_24)
                     tab.text = "Heroes"
                 }
                 1 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_bookmark_border_24)
+                    tab.icon = ContextCompat.getDrawable(view.context, R.drawable.ic_baseline_bookmark_border_24)
                     tab.text = "Events"
                 }
                 2 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_menu_book_24)
+                    tab.icon = ContextCompat.getDrawable(view.context, R.drawable.ic_baseline_menu_book_24)
                     tab.text = "Comics"
                 }
                 3 -> {
-                    tab.icon = resources.getDrawable(R.drawable.ic_baseline_favorite_border_24)
+                    tab.icon = ContextCompat.getDrawable(view.context, R.drawable.ic_baseline_favorite_border_24)
                     tab.text = "Fav's"
                 }
             }

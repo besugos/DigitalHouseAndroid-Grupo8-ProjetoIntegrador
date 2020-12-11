@@ -11,7 +11,7 @@ class ComicAdapter(private var comics: MutableList<ComicModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_story_item, parent, false)
+            .inflate(R.layout.card_comic_item, parent, false)
         return ComicViewHolder(
             view
         )

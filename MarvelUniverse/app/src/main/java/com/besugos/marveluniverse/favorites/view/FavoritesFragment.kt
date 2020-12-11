@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.home.view.favorites
+package com.besugos.marveluniverse.favorites.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.home.model.FavoriteModel
+import com.besugos.marveluniverse.favorites.model.FavoriteModel
 
 
 class FavoritesFragment : Fragment() {
@@ -33,7 +33,10 @@ class FavoritesFragment : Fragment() {
 
         _view = view
 
-        _adapter = FavoriteAdapter(requireContext(), _listFavorites)
+        _adapter = FavoriteAdapter(
+            requireContext(),
+            _listFavorites
+        )
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -45,10 +48,11 @@ class FavoritesFragment : Fragment() {
     fun createFavorites(): MutableList<FavoriteModel> {
         _listFavorites.clear()
         for (i in 1..10) {
-            val favorite = FavoriteModel(
-                i,
-                "Favorites  $i"
-            )
+            val favorite =
+                FavoriteModel(
+                    i,
+                    "Favorites  $i"
+                )
             _listFavorites.add(favorite)
         }
         return _listFavorites

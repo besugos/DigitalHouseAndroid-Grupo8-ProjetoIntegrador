@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.home.model
+package com.besugos.marveluniverse.data.model
 
 data class ImageModel (
     val path: String,
