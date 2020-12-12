@@ -5,96 +5,118 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|center"
-    android:layout_marginRight="@dimen/dim_5_dp"
     android:layout_marginLeft="@dimen/dim_5_dp"
-    app:cardCornerRadius="16dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginRight="@dimen/dim_5_dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backgroundDialog"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/dim_1000_dp"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/dim_3_dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_call_to_action_24" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dim_8_dp"
-                android:layout_marginEnd="@dimen/dim_8_dp"
-                android:layout_marginBottom="@dimen/dim_5_dp"
-                android:layout_marginTop="@dimen/dim_25_dp"
-                android:orientation="horizontal">
+                android:elevation="@dimen/dim_4_dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_8_dp"
+                    android:layout_marginTop="@dimen/dim_25_dp"
+                    android:layout_marginEnd="@dimen/dim_8_dp"
+                    android:layout_marginBottom="@dimen/dim_5_dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtTitleComicDetail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/event_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dim_28_sp"
+                        android:textStyle="bold"
+                        tools:text="@string/comic_title" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgComicDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="@dimen/dim_25_dp"
+                    android:contentDescription="@string/avatar_hero"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/img3" />
 
                 <TextView
-                    android:id="@+id/txtTitleComicDetail"
-                    android:layout_width="0dp"
+                    android:id="@+id/txtDescriptionComicDetail"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/event_name"
-                    android:text="@string/event_name"
+                    android:layout_marginStart="@dimen/dim_8_dp"
+                    android:layout_marginTop="@dimen/dim_25_dp"
+                    android:layout_marginEnd="@dimen/dim_8_dp"
+                    android:layout_marginBottom="@dimen/dim_35_dp"
+                    android:text="@string/event_description"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dim_20_sp"
+                    tools:text="@string/comic_description" />
+
+                <TextView
+                    android:id="@+id/txtCharacterStoriesDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_8_dp"
+                    android:layout_marginEnd="@dimen/dim_8_dp"
+                    android:layout_marginBottom="@dimen/dim_35_dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/characters"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_weight="1">
-                </TextView>
+                    tools:text="Characters" />
 
+                <TextView
+                    android:id="@+id/txtEventStoriesDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dim_8_dp"
+                    android:layout_marginEnd="@dimen/dim_8_dp"
+                    android:layout_marginBottom="@dimen/dim_35_dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/events"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dim_20_sp"
+                    android:textStyle="bold"
+                    tools:text="@string/events" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imgComicDetail"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="@dimen/dim_25_dp"
-                android:contentDescription="@string/avatar_hero"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/img3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/txtDescriptionComicDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/event_description"
-                android:text="@string/event_description"
-                android:textSize="@dimen/dim_20_sp"
-                android:textColor="@color/black"
-                android:layout_marginStart="@dimen/dim_8_dp"
-                android:layout_marginEnd="@dimen/dim_8_dp"
-                android:layout_marginTop="@dimen/dim_25_dp"
-                android:layout_marginBottom="@dimen/dim_35_dp" />
-
-            <TextView
-                android:id="@+id/txtCharacterStoriesDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Characters"
-                android:text="@string/characters"
-                android:textSize="@dimen/dim_20_sp"
-                android:textColor="@color/black"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginStart="@dimen/dim_8_dp"
-                android:layout_marginEnd="@dimen/dim_8_dp"
-                android:layout_marginBottom="@dimen/dim_35_dp"/>
-
-            <TextView
-                android:id="@+id/txtEventStoriesDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/events"
-                android:text="@string/events"
-                android:textSize="@dimen/dim_20_sp"
-                android:textColor="@color/black"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginStart="@dimen/dim_8_dp"
-                android:layout_marginEnd="@dimen/dim_8_dp"
-                android:layout_marginBottom="@dimen/dim_35_dp"/>
-
-        </LinearLayout>
     </ScrollView>
 
 </com.google.android.material.card.MaterialCardView>

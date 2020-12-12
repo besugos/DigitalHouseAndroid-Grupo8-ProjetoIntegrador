@@ -75,5 +75,8 @@
     <string name="not_found_image">not found image</string>
     <string name="ops_not_available">Oops, dates are not available for this one!</string>
     <string name="logo_image">logo image</string>
+    <string name="comic_title">Comic Title</string>
+    <string name="comic_description">Comic Description</string>
+    <string name="favorite_title">Favorite title</string>
 
 </resources>

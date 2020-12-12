@@ -22,7 +22,7 @@
             android:layout_marginStart="@dimen/dim_8_dp"
             android:layout_marginTop="@dimen/dim_8_dp"
             android:layout_marginEnd="@dimen/dim_8_dp"
-            android:layout_marginBottom="@dimen/dim_16_dp"
+            android:layout_marginBottom="@dimen/dim_8_dp"
             android:background="@color/white"
             android:elevation="@dimen/dim_2_dp"
             android:iconifiedByDefault="false"
