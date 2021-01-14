@@ -106,6 +106,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+<!--        <com.google.android.gms.common.SignInButton-->
+<!--            android:id="@+id/newbtnGoogleLogin"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGoogleLogin"
         style="?attr/materialButtonOutlinedStyle"
@@ -118,7 +127,6 @@
         android:text="@string/google"
         android:textColor="@color/googleText"
         android:textSize="@dimen/dim_16_sp"
-
         app:icon="@drawable/ic_google"
         app:iconTint="@color/colorTrans"
         app:iconTintMode="add"
