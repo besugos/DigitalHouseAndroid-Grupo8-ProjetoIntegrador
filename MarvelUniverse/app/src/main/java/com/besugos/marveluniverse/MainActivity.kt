@@ -12,6 +12,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.besugos.marveluniverse.home.view.CollectionFragment
 import com.besugos.marveluniverse.login.view.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 const val TAG_COLLECTION_FRAGMENT = "MAIN"
 const val INDEX = "INDEX"
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnLogout: Button
     private var collectionFragment = CollectionFragment()
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         mainToolbar = findViewById(R.id.mainToolbar)
         btnLogout = findViewById(R.id.btnLogout)
 
+
+
         setSupportActionBar(mainToolbar)
         initializeDrawer()
 
@@ -38,6 +44,8 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment, collectionFragment, TAG_COLLECTION_FRAGMENT).commit()
 
         btnLogout.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
+            auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
