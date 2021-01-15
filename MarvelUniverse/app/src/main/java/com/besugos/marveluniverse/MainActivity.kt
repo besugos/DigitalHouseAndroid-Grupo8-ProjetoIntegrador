@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.besugos.marveluniverse.home.view.CollectionFragment
 import com.besugos.marveluniverse.login.view.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.ktx.Firebase
 
 const val TAG_COLLECTION_FRAGMENT = "MAIN"
@@ -35,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         mainToolbar = findViewById(R.id.mainToolbar)
         btnLogout = findViewById(R.id.btnLogout)
 
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
 
+        Toast.makeText(this@MainActivity, user!!.email.toString(), Toast.LENGTH_SHORT).show()
 
         setSupportActionBar(mainToolbar)
         initializeDrawer()
@@ -44,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment, collectionFragment, TAG_COLLECTION_FRAGMENT).commit()
 
         btnLogout.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
             auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
