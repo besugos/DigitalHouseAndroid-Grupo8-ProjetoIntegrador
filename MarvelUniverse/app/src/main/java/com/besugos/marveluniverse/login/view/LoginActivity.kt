@@ -58,10 +58,10 @@ class LoginActivity : AppCompatActivity() {
         val btnFacebook = this.findViewById<Button>(R.id.btnFacebookLogin)
         val toolbar = this.findViewById<androidx.appcompat.widget.Toolbar>(R.id.loginToolbar)
 
-        tfEmail = findViewById<TextInputLayout>(R.id.tfEmailLogin)
-        tfPass = findViewById<TextInputLayout>(R.id.tfPassLogin)
-        etEmail = findViewById<TextInputEditText>(R.id.etEmailLogin)
-        etPass = findViewById<TextInputEditText>(R.id.etPassLogin)
+        tfEmail = findViewById(R.id.tfEmailLogin)
+        tfPass = findViewById(R.id.tfPassLogin)
+        etEmail = findViewById(R.id.etEmailLogin)
+        etPass = findViewById(R.id.etPassLogin)
 
 
         setSupportActionBar(toolbar).apply {
@@ -71,9 +71,22 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener() {
 
             if (validaCampos()) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                auth.signInWithEmailAndPassword(etEmail.text.toString(), etPass.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "signInWithEmail:success")
+                            val user = auth.currentUser
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "signInWithEmail:failure", task.exception)
+                            Toast.makeText(baseContext, "",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
 
@@ -87,10 +100,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnFacebook.setOnClickListener() {
-//            val intent = Intent(this, FacebookLoginActivity::class.java)
-//            startActivity(intent)
             loginFacebook()
-
         }
 
         setSupportActionBar(toolbar).apply {
@@ -149,7 +159,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Toast.makeText(this@LoginActivity, requestCode.toString(), Toast.LENGTH_SHORT).show()
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
