@@ -33,4 +33,9 @@
     <dimen name="dim_12_dp">12dp</dimen>
     <dimen name="dim_1000_dp">1000dp</dimen>
     <dimen name="dim_28_sp">28sp</dimen>
+    <dimen name="dim_30_sp">30sp</dimen>
+    <dimen name="dim_260_dp">260dp</dimen>
+    <dimen name="dim_150_dp">150dp</dimen>
+    <dimen name="dim_12_sp">12sp</dimen>
+    <dimen name="dim_1_dp">1dp</dimen>
 </resources>
