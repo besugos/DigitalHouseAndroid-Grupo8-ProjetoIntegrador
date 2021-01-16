@@ -29,7 +29,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:weightSum="1"
-                app:contentInsetStart="0dp"
+                app:contentInsetStart="@dimen/dim_0_dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <TextView
@@ -44,8 +44,8 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
-                    android:textColor="#ff4500"
-                    android:textSize="30sp" />
+                    android:textColor="@color/colorTextDrawer"
+                    android:textSize="@dimen/dim_30_sp" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -62,18 +62,18 @@
     <!-- Custom Navigation Drawer Start -->
     <LinearLayout
         android:id="@+id/navigation_layout"
-        android:layout_width="260dp"
+        android:layout_width="@dimen/dim_260_dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#fff"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/dim_150_dp"
             android:background="@color/colorPrimary"
             android:orientation="vertical"
-            android:padding="25dp"
+            android:padding="@dimen/dim_25_dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -81,23 +81,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_name"
-                android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/dim_18_sp" />
 
             <TextView
                 android:id="@+id/tvUserMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_email"
-                android:textColor="#fff"
-                android:textSize="12sp"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/dim_12_sp"/>
 
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dim_0_dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -138,9 +138,9 @@
             <Button
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/dim_60_dp"
                 android:text="@string/log_out"
-                app:strokeWidth="1dp"
+                app:strokeWidth="@dimen/dim_1_dp"
                 app:strokeColor="@color/colorLightGray"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
         </LinearLayout>

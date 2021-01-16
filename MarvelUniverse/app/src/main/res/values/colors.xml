@@ -15,4 +15,5 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="backgroundDialog">#EFF2F7</color>
+    <color name="colorTextDrawer">#ff4500</color>
 </resources>
