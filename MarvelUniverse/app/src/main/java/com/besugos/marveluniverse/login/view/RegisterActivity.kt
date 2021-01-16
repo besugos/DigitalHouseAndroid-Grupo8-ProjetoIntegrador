@@ -1,20 +1,21 @@
 package com.besugos.marveluniverse.login.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.besugos.marveluniverse.MainActivity
 import com.besugos.marveluniverse.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
-
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -27,9 +28,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var etRptPass: TextInputEditText
     private lateinit var etPass: TextInputEditText
     private lateinit var chk: CheckBox
-
     private lateinit var auth: FirebaseAuth
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
 
         btnSignUp.setOnClickListener() {
             if (validaCampos()) {
-                criaConta(etEmail.text.toString(), etPass.text.toString())
+                criaConta(etName.text.toString(), etEmail.text.toString(), etPass.text.toString())
             }
         }
 
@@ -175,23 +174,31 @@ class RegisterActivity : AppCompatActivity() {
         return response
     }
 
-    private fun criaConta(email: String, password: String) {
+    private fun criaConta(nome: String, email: String, password: String) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "createUserWithEmail:success")
-                    Toast.makeText(baseContext, "Usuário criado com sucesso",
-                        Toast.LENGTH_SHORT).show()
+
                     val user = auth.currentUser
+
+                    val profileUpdates = userProfileChangeRequest {
+                        displayName = nome
+                    }
+
+                    user!!.updateProfile(profileUpdates).addOnCompleteListener {
+                        Toast.makeText(
+                            baseContext, "User successfully created",
+                            Toast.LENGTH_SHORT
+                        ).show() }
+
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("TAG", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    Toast.makeText(baseContext, "Authentication failed",
                         Toast.LENGTH_SHORT).show()
                 }
             }

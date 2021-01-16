@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var collectionFragment = CollectionFragment()
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var user: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +40,7 @@ class MainActivity : AppCompatActivity() {
         btnLogout = findViewById(R.id.btnLogout)
 
         auth = FirebaseAuth.getInstance()
-        val user = auth.currentUser
-
-        Toast.makeText(this@MainActivity, user!!.email.toString(), Toast.LENGTH_SHORT).show()
+        user = auth.currentUser!!
 
         setSupportActionBar(mainToolbar)
         initializeDrawer()
@@ -109,6 +109,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
+
+                val tvNome = findViewById<TextView>(R.id.tvUserName)
+                val tvMail = findViewById<TextView>(R.id.tvUserMail)
+
+                tvNome.text = user.displayName
+                tvMail.text = user.email
+
                 try {
                     val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
