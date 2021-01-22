@@ -8,9 +8,7 @@ import com.besugos.marveluniverse.character.repository.CharacterRepository
 import kotlinx.coroutines.Dispatchers
 
 @Suppress("UNCHECKED_CAST")
-class CharacterViewModel(
-    private val repository: CharacterRepository
-): ViewModel() {
+class CharacterViewModel(private val repository: CharacterRepository): ViewModel() {
 
     private val _characters = mutableListOf<CharacterModel>()
     private var _offset = 0
