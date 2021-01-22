@@ -26,7 +26,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_call_to_action_24" />
+                app:srcCompat="@drawable/ic_baseline_call_to_action_24"
+                android:contentDescription="@string/avatar_hero" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,8 +62,8 @@
                         android:textStyle="bold"
                         tools:text="@string/character_name" />
 
-                    <ImageView
-                        android:id="@+id/imgFavoriteCharacterDetails"
+                    <ImageButton
+                        android:id="@+id/btnToggleFavorite"
                         android:layout_width="@dimen/dim_32_dp"
                         android:layout_height="@dimen/dim_32_dp"
                         android:layout_marginTop="@dimen/dim_8_dp"
@@ -70,7 +71,7 @@
                         android:contentDescription="@string/icon_heart"
                         android:focusable="true"
                         android:gravity="end"
-                        app:srcCompat="@drawable/ic_action_favorite_border"
+                        tools:srcCompat="@drawable/ic_baseline_favorite_border_24"
                         app:tint="@color/white" />
 
                 </LinearLayout>

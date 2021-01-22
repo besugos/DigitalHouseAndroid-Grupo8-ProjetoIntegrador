@@ -20,7 +20,7 @@
     <string name="google_login">Sign in with your Google Account</string>
     <string name="facebook_login">Connect with your Facebook Account</string>
     <string name="comic_description_not_found">Oops, no description for this comic :(</string>
-
+    <string name="character_description_not_found">Oops, no description for this hero :(</string>
 
 
 

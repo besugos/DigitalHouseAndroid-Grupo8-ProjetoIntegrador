@@ -1,11 +1,16 @@
 package com.besugos.marveluniverse.character.view
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,12 +19,18 @@ import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.character.repository.CharacterRepository
 import com.besugos.marveluniverse.character.viewmodel.CharacterViewModel
 import com.besugos.marveluniverse.character.model.CharacterModel
+import com.besugos.marveluniverse.data.room.MyDataBase
+import com.besugos.marveluniverse.favorite.model.FavoriteModel
+import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
+import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 
 
 class CharactersFragment : Fragment() {
 
-    private lateinit var _view: View
-    private lateinit var _viewModel: CharacterViewModel
+    private lateinit var _myView: View
+    private lateinit var _characterViewModel: CharacterViewModel
     private lateinit var _adapter: CharactersAdapter
 
     private var _listCharacters = mutableListOf<CharacterModel>()
@@ -38,7 +49,7 @@ class CharactersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _view = view
+        _myView = view
         initialSearch()
         showLoading(true)
         initSearchView()
@@ -47,14 +58,13 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initialSearch() {
-        val recyclerView = _view.findViewById<RecyclerView>(R.id.recyclerCharacter)
-        val manager = LinearLayoutManager(_view.context)
+        val recyclerView = _myView.findViewById<RecyclerView>(R.id.recyclerCharacter)
+        val manager = LinearLayoutManager(_myView.context)
 
         _listCharacters = mutableListOf()
-        _adapter =
-            CharactersAdapter(
-                _listCharacters
-            )
+        _adapter = CharactersAdapter(_listCharacters){
+            createModal(it)
+        }
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -62,12 +72,12 @@ class CharactersFragment : Fragment() {
             adapter = _adapter
         }
 
-        _viewModel = ViewModelProvider(
+        _characterViewModel = ViewModelProvider(
             this,
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
-        _viewModel.getCharacters().observe(viewLifecycleOwner, Observer {
+        _characterViewModel.getCharacters().observe(viewLifecycleOwner, Observer {
             showResult(it)
         })
 
@@ -81,7 +91,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        val viewLoading = _view.findViewById<View>(R.id.loading)
+        val viewLoading = _myView.findViewById<View>(R.id.loading)
 
         if (isLoading) {
             viewLoading.visibility = View.VISIBLE
@@ -91,7 +101,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initSearchView() {
-        val searchCharacter = _view.findViewById<SearchView>(R.id.searchCharacter)
+        val searchCharacter = _myView.findViewById<SearchView>(R.id.searchCharacter)
 
         searchCharacter.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -99,7 +109,7 @@ class CharactersFragment : Fragment() {
                 searchCharacter.clearFocus()
                 _searchByName = query
 
-                _viewModel.getCharacters(_searchByName).observe(viewLifecycleOwner, Observer {
+                _characterViewModel.getCharacters(_searchByName).observe(viewLifecycleOwner, Observer {
                     _listCharacters.clear()
                     showResult(it)
                 })
@@ -111,7 +121,7 @@ class CharactersFragment : Fragment() {
                 if (newText.isNullOrEmpty()) {
                     _listCharacters.clear()
                     _searchByName = null
-                    showResult(_viewModel.getLocalCharacters())
+                    showResult(_characterViewModel.getLocalCharacters())
                 }
 
                 return true
@@ -120,7 +130,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun setScrollView() {
-        _view.findViewById<RecyclerView>(R.id.recyclerCharacter).addOnScrollListener(object :
+        _myView.findViewById<RecyclerView>(R.id.recyclerCharacter).addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -136,7 +146,7 @@ class CharactersFragment : Fragment() {
                 if (totalItemCount > 0 && lastItem && !_wasTheLastPageReturned) {
                     _wasTheLastPageReturned = true
                     _totalItemCountAux = totalItemCount
-                    _viewModel.nextPage(_searchByName).observe(viewLifecycleOwner, Observer {
+                    _characterViewModel.nextPage(_searchByName).observe(viewLifecycleOwner, Observer {
                         showResult(it)
                     })
                 }
@@ -147,9 +157,80 @@ class CharactersFragment : Fragment() {
 
     private fun listNotFound(notFound: Boolean) {
         if (notFound) {
-            _view.findViewById<View>(R.id.layoutNotFound).visibility = View.VISIBLE
+            _myView.findViewById<View>(R.id.layoutNotFound).visibility = View.VISIBLE
         } else {
-            _view.findViewById<View>(R.id.layoutNotFound).visibility = View.GONE
+            _myView.findViewById<View>(R.id.layoutNotFound).visibility = View.GONE
+        }
+    }
+
+    @SuppressLint("InflateParams")
+    private fun createModal(character: CharacterModel) {
+        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layoutView = inflater.inflate(R.layout.character_detail, null)
+        val modal = BottomSheetDialog(_myView.context)
+
+        val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
+        characterName.text = character.name
+
+        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
+        characterDescription.text =
+            if (character.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
+            else character.description
+
+        val imgHero = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
+        Picasso.get()
+            .load(character.thumbnail!!.getThumb("standard_fantastic"))
+            .into(imgHero)
+
+        val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
+
+        val favoriteModel = FavoriteModel(
+            character.id!!,
+            character.name,
+            character.description,
+            character.thumbnail.path,
+            character.thumbnail.extension
+        )
+
+        val favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModel.FavoriteViewModelFactory(
+                FavoriteRepository(MyDataBase.getDataBaseClient(_myView.context).favoriteDAO())
+            )
+        ).get(FavoriteViewModel::class.java)
+        favoriteViewModel.getFavoriteById(favoriteModel.id).observe(viewLifecycleOwner, Observer {
+            character.fav = it != null
+
+            btnToggleFavorite.setBackgroundResource(
+                if(character.fav) R.drawable.ic_baseline_favorite_24
+                else R.drawable.ic_baseline_favorite_border_24
+            )
+
+            modal.apply {
+                setContentView(layoutView)
+                show()
+            }
+        })
+
+        btnToggleFavorite.setOnClickListener {
+            character.fav = !character.fav
+            if (character.fav) {
+                favoriteViewModel.insertFavorite(favoriteModel).observe(
+                    viewLifecycleOwner, Observer { wasUnlocked ->
+                        if(wasUnlocked) {
+                            btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                        }
+                    }
+                )
+            } else {
+                favoriteViewModel.removeFavorite(favoriteModel).observe(
+                    viewLifecycleOwner, Observer { wasUnlocked ->
+                        if(wasUnlocked) {
+                            btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+                        }
+                    }
+                )
+            }
         }
     }
 
