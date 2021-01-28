@@ -7,7 +7,8 @@
     android:layout_gravity="bottom|center"
     android:layout_marginLeft="@dimen/dim_5_dp"
     android:layout_marginRight="@dimen/dim_5_dp"
-    app:cardCornerRadius="@dimen/dim_16_dp">
+    app:cardCornerRadius="@dimen/dim_0_dp"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,13 +22,13 @@
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/dim_1000_dp"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/avatar_hero"
                 android:elevation="@dimen/dim_3_dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_call_to_action_24"
-                android:contentDescription="@string/avatar_hero" />
+                app:srcCompat="@drawable/ic_baseline_call_to_action_24" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,8 +72,8 @@
                         android:contentDescription="@string/icon_heart"
                         android:focusable="true"
                         android:gravity="end"
-                        tools:srcCompat="@drawable/ic_baseline_favorite_border_24"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        tools:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
                 </LinearLayout>
 
