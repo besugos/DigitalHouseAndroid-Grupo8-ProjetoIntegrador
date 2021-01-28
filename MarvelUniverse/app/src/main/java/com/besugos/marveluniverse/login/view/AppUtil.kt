@@ -10,5 +10,4 @@ object AppUtil {
             context.getSharedPreferences("APP", Context.MODE_PRIVATE)
         preferences.edit().putString("UIID", uiid).apply()
     }
-
 }
