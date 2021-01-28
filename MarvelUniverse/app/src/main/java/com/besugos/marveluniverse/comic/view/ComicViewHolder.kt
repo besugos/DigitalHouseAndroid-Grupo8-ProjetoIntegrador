@@ -16,7 +16,6 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 const val IMG_RESOLUTION_SMALL = "standard_small"
 const val IMG_RESOLUTION_FANTASTIC = "standard_fantastic"
 
-@SuppressLint("InflateParams")
 class ComicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val _imgComicCard = view.findViewById<ImageView>(R.id.imgComicCard)

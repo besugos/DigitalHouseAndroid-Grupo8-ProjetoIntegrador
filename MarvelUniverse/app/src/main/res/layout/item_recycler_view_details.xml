@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:id="@+id/itemRecyclerImage"-->
+<!--        android:layout_width="@dimen/dim_60_dp"-->
+<!--        android:layout_height="@dimen/dim_60_dp"-->
+<!--        tools:src="@drawable/marvel"/>-->
+
+    <TextView
+        android:id="@+id/itemRecyclerDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorMarvelRed"
+        android:textSize="@dimen/dim_15_sp"
+        tools:text="3-D MAN"/>
+
+</LinearLayout>

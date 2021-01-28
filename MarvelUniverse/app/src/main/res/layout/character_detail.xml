@@ -11,6 +11,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,13 +104,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_35_dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/events"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/characterDetailsEventsList"/>
 
                 <TextView
                     android:id="@+id/txtStoryCharacterDetails"
@@ -124,6 +129,11 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/characterDetailsComicsList"/>
 
             </LinearLayout>
 

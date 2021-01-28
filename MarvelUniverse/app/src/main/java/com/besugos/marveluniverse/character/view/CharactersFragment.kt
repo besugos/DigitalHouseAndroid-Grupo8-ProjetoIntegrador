@@ -23,6 +23,7 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.besugos.marveluniverse.home.model.EventSummaryModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 
@@ -32,6 +33,7 @@ class CharactersFragment : Fragment() {
     private lateinit var _myView: View
     private lateinit var _characterViewModel: CharacterViewModel
     private lateinit var _adapter: CharactersAdapter
+    private lateinit var eventsAdapter: CharactersEventsAdapter
 
     private var _listCharacters = mutableListOf<CharacterModel>()
     private var _searchByName: String? = null
@@ -163,7 +165,6 @@ class CharactersFragment : Fragment() {
         }
     }
 
-    @SuppressLint("InflateParams")
     private fun createModal(character: CharacterModel) {
         val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutView = inflater.inflate(R.layout.character_detail, null)
@@ -181,6 +182,23 @@ class CharactersFragment : Fragment() {
         Picasso.get()
             .load(character.thumbnail!!.getThumb("standard_fantastic"))
             .into(imgHero)
+
+        val recyclerViewEvents = layoutView.findViewById<RecyclerView>(R.id.characterDetailsEventsList)
+        val eventsManager = LinearLayoutManager(modal.context, LinearLayoutManager.HORIZONTAL, false)
+
+        val listEvents = mutableListOf<EventSummaryModel>()
+        val eventsDetails = character.events?.items
+        eventsDetails?.forEach() {
+            listEvents.add(it)
+        }
+
+        eventsAdapter = CharactersEventsAdapter(listEvents)
+
+        recyclerViewEvents?.apply {
+            setHasFixedSize(true)
+            layoutManager = eventsManager
+            adapter = eventsAdapter
+        }
 
         val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
 
