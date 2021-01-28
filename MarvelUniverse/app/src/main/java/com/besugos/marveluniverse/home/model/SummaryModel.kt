@@ -16,3 +16,8 @@ data class EventSummaryModel (
     val resourceURI: String,
     val name: String
 )
+
+data class ComicSummaryModel (
+    val resourceURI: String,
+    val name: String
+)

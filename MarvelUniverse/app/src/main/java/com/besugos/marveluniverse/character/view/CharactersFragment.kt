@@ -23,6 +23,7 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.besugos.marveluniverse.home.model.ComicSummaryModel
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
@@ -34,6 +35,7 @@ class CharactersFragment : Fragment() {
     private lateinit var _characterViewModel: CharacterViewModel
     private lateinit var _adapter: CharactersAdapter
     private lateinit var eventsAdapter: CharactersEventsAdapter
+    private lateinit var comicsAdapter: CharactersComicsAdapter
 
     private var _listCharacters = mutableListOf<CharacterModel>()
     private var _searchByName: String? = null
@@ -199,6 +201,24 @@ class CharactersFragment : Fragment() {
             layoutManager = eventsManager
             adapter = eventsAdapter
         }
+
+        val recyclerViewComics = layoutView.findViewById<RecyclerView>(R.id.characterDetailsComicsList)
+        val comicsManager = LinearLayoutManager(modal.context, LinearLayoutManager.HORIZONTAL, false)
+
+        val listComics = mutableListOf<ComicSummaryModel>()
+        val comicsDetails = character.comics?.items
+        comicsDetails?.forEach() {
+            listComics.add(it)
+        }
+
+        comicsAdapter = CharactersComicsAdapter(listComics)
+
+        recyclerViewComics?.apply {
+            setHasFixedSize(true)
+            layoutManager = comicsManager
+            adapter = eventsAdapter
+        }
+
 
         val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
 
