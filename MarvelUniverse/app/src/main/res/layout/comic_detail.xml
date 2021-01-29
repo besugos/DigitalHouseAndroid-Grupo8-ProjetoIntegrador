@@ -8,7 +8,8 @@
     android:layout_marginLeft="@dimen/dim_5_dp"
     android:layout_marginRight="@dimen/dim_5_dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/dim_16_dp">
+    app:cardCornerRadius="@dimen/dim_0_dp">
+
 
     <ScrollView
         android:layout_width="match_parent"

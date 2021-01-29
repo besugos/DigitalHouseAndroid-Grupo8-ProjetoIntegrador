@@ -19,6 +19,8 @@
         app:tabIconTint="@color/white"
         app:tabTextColor="@color/white"
         android:background="@color/colorMarvelRed"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="@dimen/dim_5_dp"
         android:id="@+id/tabLayout"/>
 
 </LinearLayout>
