@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 
-class ComicEventsViewHolder (view: View): RecyclerView.ViewHolder(view) {
+class ComicEventsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val name = view.findViewById<TextView>(R.id.itemRecyclerDetails)
 

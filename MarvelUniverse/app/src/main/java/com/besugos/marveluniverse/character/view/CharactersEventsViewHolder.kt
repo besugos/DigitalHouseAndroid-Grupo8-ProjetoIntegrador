@@ -7,7 +7,7 @@ import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 import de.hdodenhof.circleimageview.CircleImageView
 
-class CharactersEventsViewHolder (view: View): RecyclerView.ViewHolder(view) {
+class CharactersEventsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val name = view.findViewById<TextView>(R.id.itemRecyclerDetails)
 

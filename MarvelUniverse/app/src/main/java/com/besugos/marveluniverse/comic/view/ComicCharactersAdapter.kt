@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.CharacterSummaryModel
 
-class ComicCharactersAdapter (private var listCharacters: MutableList<CharacterSummaryModel>): RecyclerView.Adapter<ComicCharactersViewHolder>() {
+class ComicCharactersAdapter(private var listCharacters: MutableList<CharacterSummaryModel>) :
+    RecyclerView.Adapter<ComicCharactersViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicCharactersViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_view_details, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_recycler_view_details, parent, false)
         return ComicCharactersViewHolder(view)
     }
 

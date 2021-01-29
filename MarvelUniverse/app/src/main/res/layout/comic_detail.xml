@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
-                    android:layout_marginTop="@dimen/dim_25_dp"
+                    android:layout_marginTop="@dimen/dim_10_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
                     android:layout_marginBottom="@dimen/dim_5_dp"
                     android:orientation="horizontal">
@@ -65,7 +65,6 @@
                     android:id="@+id/imgComicDetail"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    android:layout_marginTop="@dimen/dim_25_dp"
                     android:contentDescription="@string/avatar_hero"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/img3" />

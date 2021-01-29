@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
-                    android:layout_marginTop="@dimen/dim_25_dp"
+                    android:layout_marginTop="@dimen/dim_5_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
                     android:layout_marginBottom="@dimen/dim_5_dp"
                     android:orientation="horizontal">
@@ -59,19 +59,21 @@
                         android:textStyle="bold"
                         tools:text="@string/event_name" />
 
+                    <TextView
+                        android:id="@+id/txtEventYearDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dim_8_dp"
+                        android:layout_marginEnd="@dimen/dim_8_dp"
+                        android:layout_marginBottom="@dimen/dim_25_dp"
+                        android:text="@string/start_year_end_year"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dim_20_sp"
+                        tools:text="@string/start_year_end_year" />
+
+
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtEventYearDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dim_8_dp"
-                    android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_25_dp"
-                    android:text="@string/start_year_end_year"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dim_20_sp"
-                    tools:text="@string/start_year_end_year" />
 
                 <ImageView
                     android:id="@+id/imgAvatarEventDetails"
@@ -100,7 +102,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_35_dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/characters"
@@ -108,19 +109,28 @@
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventDetailsCharacterList"/>
+
                 <TextView
                     android:id="@+id/txtStoryEventDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_35_dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/comics"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventDetailsComicList"/>
 
             </LinearLayout>
 

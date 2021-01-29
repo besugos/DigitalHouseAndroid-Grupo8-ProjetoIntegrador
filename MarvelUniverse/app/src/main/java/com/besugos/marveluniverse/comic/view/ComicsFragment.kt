@@ -62,8 +62,8 @@ class ComicsFragment : Fragment() {
 
         _comics = mutableListOf()
         _adapter = ComicAdapter(_comics) {
-                createModal(it)
-            }
+            createModal(it)
+        }
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -103,7 +103,7 @@ class ComicsFragment : Fragment() {
     private fun initSearchView() {
         val searchCharacter = _view.findViewById<SearchView>(R.id.searchComic)
 
-        searchCharacter.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchCharacter.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 showLoading(true)
                 searchCharacter.clearFocus()
@@ -141,7 +141,8 @@ class ComicsFragment : Fragment() {
                 val lastVisible = target.findLastVisibleItemPosition()
                 val lastItem = lastVisible + 5 >= totalItemCount
 
-                if(_wasTheLastPageReturned) _wasTheLastPageReturned = _totalItemCountAux == totalItemCount
+                if (_wasTheLastPageReturned) _wasTheLastPageReturned =
+                    _totalItemCountAux == totalItemCount
 
                 if (totalItemCount > 0 && lastItem && !_wasTheLastPageReturned) {
                     _wasTheLastPageReturned = true
@@ -164,13 +165,15 @@ class ComicsFragment : Fragment() {
     }
 
     private fun createModal(_comic: ComicModel) {
-        val inflater = _view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater =
+            _view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutView = inflater.inflate(R.layout.comic_detail, null)
         val alertDialog = BottomSheetDialog(_view.context)
 
         val txtTitleComicDetail = layoutView.findViewById<TextView>(R.id.txtTitleComicDetail)
         val imgComicDetail = layoutView.findViewById<ImageView>(R.id.imgComicDetail)
-        val txtDescriptionComicDetail = layoutView.findViewById<TextView>(R.id.txtDescriptionComicDetail)
+        val txtDescriptionComicDetail =
+            layoutView.findViewById<TextView>(R.id.txtDescriptionComicDetail)
 
         txtTitleComicDetail.text = _comic.title
 
@@ -179,7 +182,8 @@ class ComicsFragment : Fragment() {
             .into(imgComicDetail)
 
         val recyclerViewEvents = layoutView.findViewById<RecyclerView>(R.id.comicDetailsEventList)
-        val eventsManager = LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
+        val eventsManager =
+            LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
 
         val listEvents = mutableListOf<EventSummaryModel>()
         val eventsDetails = _comic.events?.items
@@ -195,8 +199,10 @@ class ComicsFragment : Fragment() {
             adapter = eventsAdapter
         }
 
-        val recyclerViewCharacters = layoutView.findViewById<RecyclerView>(R.id.comicDetailsCharacterList)
-        val charactersManager = LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
+        val recyclerViewCharacters =
+            layoutView.findViewById<RecyclerView>(R.id.comicDetailsCharacterList)
+        val charactersManager =
+            LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
 
         val listCharacters = mutableListOf<CharacterSummaryModel>()
         val charactersDetails = _comic.characters?.items
@@ -219,8 +225,9 @@ class ComicsFragment : Fragment() {
 
 
 
-        if (_comic.description.isNullOrEmpty()){
-            txtDescriptionComicDetail.text  = _view.context.getString(R.string.comic_description_not_found)
+        if (_comic.description.isNullOrEmpty()) {
+            txtDescriptionComicDetail.text =
+                _view.context.getString(R.string.comic_description_not_found)
         } else {
             txtDescriptionComicDetail.text = _comic.description
         }

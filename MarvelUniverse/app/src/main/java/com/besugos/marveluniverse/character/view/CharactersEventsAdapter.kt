@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 
-class CharactersEventsAdapter(private var listEvents: MutableList<EventSummaryModel>): RecyclerView.Adapter<CharactersEventsViewHolder>() {
+class CharactersEventsAdapter(private var listEvents: MutableList<EventSummaryModel>) :
+    RecyclerView.Adapter<CharactersEventsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersEventsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_view_details, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_recycler_view_details, parent, false)
         return CharactersEventsViewHolder(view)
     }
 

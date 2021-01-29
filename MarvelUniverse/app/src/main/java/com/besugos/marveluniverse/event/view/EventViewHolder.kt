@@ -40,49 +40,49 @@ class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     }
 
-    init {
-        view.setOnClickListener {
-            val inflater = itemView.context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val layoutView = inflater.inflate(R.layout.events_detail, null)
-            val alertaDialog = BottomSheetDialog(itemView.context)
-
-            val eventName = layoutView.findViewById<TextView>(R.id.txtNameEventDetails)
-
-            eventName.text = eventModel.title
-
-            val eventDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionEventDetails)
-
-            if (eventModel.description.isNullOrEmpty()){
-                eventDescription.text  = "Oops, no description for this hero :("
-            } else {
-                eventDescription.text = eventModel.description
-            }
-
-            val imgUrl = eventModel.thumbnail!!.getThumb("standard_fantastic")
-
-
-
-            val eventImage = layoutView.findViewById<ImageView>(R.id.imgAvatarEventDetails)
-
-            Picasso.get()
-                .load(imgUrl)
-                .into(eventImage)
-
-            val duration = layoutView.findViewById<TextView>(R.id.txtEventYearDetails)
-
-            if (eventModel.start.isNullOrEmpty() || eventModel.end.isNullOrEmpty()){
-                duration.text = layoutView.context.getString(R.string.ops_not_available)
-            } else {
-                val startDate = eventModel.start?.substring(0, 7)
-                val endDate = eventModel.end?.substring(0, 7)
-                duration.text = "${startDate} - ${endDate}"
-            }
-            alertaDialog.apply {
-                setContentView(layoutView)
-                show()
-            }
-
-        }
-    }
+//    init {
+//        view.setOnClickListener {
+//            val inflater = itemView.context
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//            val layoutView = inflater.inflate(R.layout.events_detail, null)
+//            val alertaDialog = BottomSheetDialog(itemView.context)
+//
+//            val eventName = layoutView.findViewById<TextView>(R.id.txtNameEventDetails)
+//
+//            eventName.text = eventModel.title
+//
+//            val eventDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionEventDetails)
+//
+//            if (eventModel.description.isNullOrEmpty()){
+//                eventDescription.text  = "Oops, no description for this hero :("
+//            } else {
+//                eventDescription.text = eventModel.description
+//            }
+//
+//            val imgUrl = eventModel.thumbnail!!.getThumb("standard_fantastic")
+//
+//
+//
+//            val eventImage = layoutView.findViewById<ImageView>(R.id.imgAvatarEventDetails)
+//
+//            Picasso.get()
+//                .load(imgUrl)
+//                .into(eventImage)
+//
+//            val duration = layoutView.findViewById<TextView>(R.id.txtEventYearDetails)
+//
+//            if (eventModel.start.isNullOrEmpty() || eventModel.end.isNullOrEmpty()){
+//                duration.text = layoutView.context.getString(R.string.ops_not_available)
+//            } else {
+//                val startDate = eventModel.start?.substring(0, 7)
+//                val endDate = eventModel.end?.substring(0, 7)
+//                duration.text = "${startDate} - ${endDate}"
+//            }
+//            alertaDialog.apply {
+//                setContentView(layoutView)
+//                show()
+//            }
+//
+//        }
+//    }
 }

@@ -1,4 +1,4 @@
-package com.besugos.marveluniverse.comic.view
+package com.besugos.marveluniverse.event.view
 
 import android.view.View
 import android.widget.TextView
@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.home.model.CharacterSummaryModel
 
-class ComicCharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class EventCharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val name = view.findViewById<TextView>(R.id.itemRecyclerDetails)
 
-    fun bind(event: CharacterSummaryModel) {
+    fun bind(character: CharacterSummaryModel) {
 
-        name.text = event.name
+        name.text = character.name
 
     }
 }

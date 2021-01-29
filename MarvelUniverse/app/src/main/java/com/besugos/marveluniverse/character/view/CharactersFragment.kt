@@ -2,6 +2,7 @@ package com.besugos.marveluniverse.character.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,7 +67,7 @@ class CharactersFragment : Fragment() {
         val manager = LinearLayoutManager(_myView.context)
 
         _listCharacters = mutableListOf()
-        _adapter = CharactersAdapter(_listCharacters){
+        _adapter = CharactersAdapter(_listCharacters) {
             createModal(it)
         }
 
@@ -107,16 +108,17 @@ class CharactersFragment : Fragment() {
     private fun initSearchView() {
         val searchCharacter = _myView.findViewById<SearchView>(R.id.searchCharacter)
 
-        searchCharacter.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchCharacter.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 showLoading(true)
                 searchCharacter.clearFocus()
                 _searchByName = query
 
-                _characterViewModel.getCharacters(_searchByName).observe(viewLifecycleOwner, Observer {
-                    _listCharacters.clear()
-                    showResult(it)
-                })
+                _characterViewModel.getCharacters(_searchByName)
+                    .observe(viewLifecycleOwner, Observer {
+                        _listCharacters.clear()
+                        showResult(it)
+                    })
 
                 return false
             }
@@ -145,14 +147,16 @@ class CharactersFragment : Fragment() {
                 val lastVisible = target.findLastVisibleItemPosition()
                 val lastItem = lastVisible + 5 >= totalItemCount
 
-                if(_wasTheLastPageReturned) _wasTheLastPageReturned = _totalItemCountAux == totalItemCount
+                if (_wasTheLastPageReturned) _wasTheLastPageReturned =
+                    _totalItemCountAux == totalItemCount
 
                 if (totalItemCount > 0 && lastItem && !_wasTheLastPageReturned) {
                     _wasTheLastPageReturned = true
                     _totalItemCountAux = totalItemCount
-                    _characterViewModel.nextPage(_searchByName).observe(viewLifecycleOwner, Observer {
-                        showResult(it)
-                    })
+                    _characterViewModel.nextPage(_searchByName)
+                        .observe(viewLifecycleOwner, Observer {
+                            showResult(it)
+                        })
                 }
 
             }
@@ -168,14 +172,16 @@ class CharactersFragment : Fragment() {
     }
 
     private fun createModal(character: CharacterModel) {
-        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater =
+            _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutView = inflater.inflate(R.layout.character_detail, null)
         val modal = BottomSheetDialog(_myView.context)
 
         val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
         characterName.text = character.name
 
-        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
+        val characterDescription =
+            layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
         characterDescription.text =
             if (character.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
             else character.description
@@ -185,13 +191,20 @@ class CharactersFragment : Fragment() {
             .load(character.thumbnail!!.getThumb("standard_fantastic"))
             .into(imgHero)
 
-        val recyclerViewEvents = layoutView.findViewById<RecyclerView>(R.id.characterDetailsEventsList)
-        val eventsManager = LinearLayoutManager(modal.context, LinearLayoutManager.HORIZONTAL, false)
+        val recyclerViewEvents =
+            layoutView.findViewById<RecyclerView>(R.id.characterDetailsEventsList)
+        val eventsManager =
+            LinearLayoutManager(modal.context, LinearLayoutManager.HORIZONTAL, false)
 
         val listEvents = mutableListOf<EventSummaryModel>()
         val eventsDetails = character.events?.items
         eventsDetails?.forEach() {
             listEvents.add(it)
+        }
+
+        if (listEvents.isNullOrEmpty()) {
+            val txtEvent = layoutView.findViewById<TextView>(R.id.txtEventCharacterDetails)
+            txtEvent.visibility = View.GONE
         }
 
         eventsAdapter = CharactersEventsAdapter(listEvents)
@@ -202,13 +215,20 @@ class CharactersFragment : Fragment() {
             adapter = eventsAdapter
         }
 
-        val recyclerViewComics = layoutView.findViewById<RecyclerView>(R.id.characterDetailsComicsList)
-        val comicsManager = LinearLayoutManager(modal.context, LinearLayoutManager.HORIZONTAL, false)
+        val recyclerViewComics =
+            layoutView.findViewById<RecyclerView>(R.id.characterDetailsComicsList)
+        val comicsManager =
+            LinearLayoutManager(modal.context, LinearLayoutManager.HORIZONTAL, false)
 
         val listComics = mutableListOf<ComicSummaryModel>()
         val comicsDetails = character.comics?.items
         comicsDetails?.forEach() {
             listComics.add(it)
+        }
+
+        if (listComics.isNullOrEmpty()) {
+            val txtComic = layoutView.findViewById<TextView>(R.id.txtStoryCharacterDetails)
+            txtComic.visibility = View.GONE
         }
 
         comicsAdapter = CharactersComicsAdapter(listComics)
@@ -240,7 +260,7 @@ class CharactersFragment : Fragment() {
             character.fav = it != null
 
             btnToggleFavorite.setBackgroundResource(
-                if(character.fav) R.drawable.ic_baseline_favorite_24
+                if (character.fav) R.drawable.ic_baseline_favorite_24
                 else R.drawable.ic_baseline_favorite_border_24
             )
 
@@ -255,7 +275,7 @@ class CharactersFragment : Fragment() {
             if (character.fav) {
                 favoriteViewModel.insertFavorite(favoriteModel).observe(
                     viewLifecycleOwner, Observer { wasUnlocked ->
-                        if(wasUnlocked) {
+                        if (wasUnlocked) {
                             btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
                         }
                     }
@@ -263,7 +283,7 @@ class CharactersFragment : Fragment() {
             } else {
                 favoriteViewModel.removeFavorite(favoriteModel).observe(
                     viewLifecycleOwner, Observer { wasUnlocked ->
-                        if(wasUnlocked) {
+                        if (wasUnlocked) {
                             btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
                         }
                     }

@@ -18,7 +18,7 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(hero: CharacterModel) {
         name.text = hero.name
-        if (hero.description.isNullOrEmpty()){
+        if (hero.description.isNullOrEmpty()) {
             description.text = itemView.context.getText(R.string.character_description_not_found)
         } else {
             description.text = hero.description
