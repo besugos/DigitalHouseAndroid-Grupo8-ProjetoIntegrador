@@ -13,7 +13,8 @@ class CharactersAdapter(
     RecyclerView.Adapter<CharactersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_character_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.card_character_item, parent, false)
         return CharactersViewHolder(view)
     }
 

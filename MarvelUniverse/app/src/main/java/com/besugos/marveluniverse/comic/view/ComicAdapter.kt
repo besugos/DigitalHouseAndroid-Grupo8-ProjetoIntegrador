@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.comic.model.ComicModel
 
-class ComicAdapter(private var comics: MutableList<ComicModel>) :
+class ComicAdapter(
+    private var comics: MutableList<ComicModel>,
+    private val listener: (ComicModel) -> Unit
+) :
     RecyclerView.Adapter<ComicViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
@@ -18,8 +21,9 @@ class ComicAdapter(private var comics: MutableList<ComicModel>) :
     }
 
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
-        val story = comics[position]
-        holder.bind(story)
+        val comic = comics[position]
+        holder.bind(comic)
+        holder.itemView.setOnClickListener { listener(comic) }
     }
 
     override fun getItemCount() = comics.size

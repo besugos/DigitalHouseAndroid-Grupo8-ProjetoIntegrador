@@ -12,6 +12,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +93,7 @@
                     android:layout_marginStart="@dimen/dim_8_dp"
                     android:layout_marginTop="@dimen/dim_25_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_35_dp"
+                    android:layout_marginBottom="@dimen/dim_20_dp"
                     android:text="@string/character_description"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dim_20_sp"
@@ -104,7 +105,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_35_dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/events"
@@ -112,19 +112,28 @@
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/characterDetailsEventsList"/>
+
                 <TextView
                     android:id="@+id/txtStoryCharacterDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
                     android:layout_marginEnd="@dimen/dim_8_dp"
-                    android:layout_marginBottom="@dimen/dim_35_dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/comics"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dim_20_sp"
                     android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/characterDetailsComicsList"/>
 
             </LinearLayout>
 

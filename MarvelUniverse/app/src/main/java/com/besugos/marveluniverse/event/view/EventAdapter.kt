@@ -8,7 +8,8 @@ import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.event.model.EventModel
 
 class EventAdapter(
-    private var events: MutableList<EventModel>
+    private var events: MutableList<EventModel>,
+    private val listener: (EventModel) -> Unit
 ) :
     RecyclerView.Adapter<EventViewHolder>() {
 
@@ -22,6 +23,7 @@ class EventAdapter(
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = events[position]
         holder.bind(event)
+        holder.itemView.setOnClickListener { listener(event) }
     }
 
     override fun getItemCount() = events.size
