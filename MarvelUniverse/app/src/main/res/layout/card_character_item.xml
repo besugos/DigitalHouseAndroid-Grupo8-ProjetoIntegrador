@@ -35,21 +35,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dim_8_dp"
-                android:textColor="@color/gray"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="@dimen/dim_24_sp"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/dim_18_sp"
                 tools:text="@string/spider_man" />
 
-            <TextView
-                android:id="@+id/txtCharecterCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorLightGray"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="@dimen/dim_15_sp"
-                tools:text="Event 1 short description" />
         </LinearLayout>
 
     </LinearLayout>

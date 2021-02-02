@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imgAvatarEventCard"
-            android:layout_width="@dimen/dim_80_dp"
-            android:layout_height="@dimen/dim_80_dp"
+            android:layout_width="@dimen/dim_60_dp"
+            android:layout_height="@dimen/dim_60_dp"
             android:layout_gravity="center"
             android:contentDescription="@string/avatar_hero"
             tools:background="@color/gray" />
@@ -38,18 +38,8 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/dim_24_sp"
+                android:textSize="@dimen/dim_18_sp"
                 tools:text="@string/spider_man" />
-
-            <TextView
-                android:id="@+id/txtDescriptionEventCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textSize="@dimen/dim_15_sp"
-                tools:text="Event 1 short description" />
 
         </LinearLayout>
 

@@ -14,6 +14,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
@@ -74,6 +75,7 @@ class CharactersFragment : Fragment() {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = manager
+            addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
             adapter = _adapter
         }
 

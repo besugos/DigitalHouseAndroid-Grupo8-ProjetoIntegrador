@@ -2,21 +2,23 @@ package com.besugos.marveluniverse
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.besugos.marveluniverse.comic.view.IMG_RESOLUTION_SMALL
 import com.besugos.marveluniverse.home.view.CollectionFragment
 import com.besugos.marveluniverse.login.view.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 const val TAG_COLLECTION_FRAGMENT = "MAIN"
 const val INDEX = "INDEX"
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var mainToolbar: androidx.appcompat.widget.Toolbar
     private lateinit var btnLogout: Button
+    private lateinit var userImg: ImageView
     private var collectionFragment = CollectionFragment()
 
     private lateinit var auth: FirebaseAuth
@@ -112,7 +115,15 @@ class MainActivity : AppCompatActivity() {
 
                 val tvNome = findViewById<TextView>(R.id.tvUserName)
                 val tvMail = findViewById<TextView>(R.id.tvUserMail)
+                userImg = findViewById(R.id.imgUser)
 
+                if (user.photoUrl != null) {
+                    Picasso.get()
+                        .load(user.photoUrl)
+                        .transform(CropCircleTransformation())
+                        .into(userImg)
+                }
+                
                 tvNome.text = user.displayName
                 tvMail.text = user.email
 

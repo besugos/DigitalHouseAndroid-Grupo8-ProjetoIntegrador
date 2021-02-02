@@ -13,16 +13,11 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private var name = view.findViewById<TextView>(R.id.txtNameFavoriteCard)
-    private val description = view.findViewById<TextView>(R.id.txtFavoriteCard)
     private val avatar = view.findViewById<ImageView>(R.id.imgAvatarFavoriteCard)
 
     fun bind(favorite: FavoriteModel) {
         name.text = favorite.name
-        if (favorite.description.isNullOrEmpty()){
-            description.text = itemView.context.getText(R.string.character_description_not_found)
-        } else {
-            description.text = favorite.description
-        }
+
         val imgUrl = ImageModel(favorite.path!!, favorite.extension!!).getThumb("standard_small")
 
         Picasso.get()
@@ -30,5 +25,4 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             .transform(CropCircleTransformation())
             .into(avatar)
     }
-
 }
