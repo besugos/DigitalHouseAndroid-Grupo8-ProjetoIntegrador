@@ -1,6 +1,7 @@
 package com.besugos.marveluniverse.comic.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,7 +64,9 @@ class ComicsFragment : Fragment() {
 
         _comics = mutableListOf()
         _adapter = ComicAdapter(_comics) {
-            createModal(it)
+            val intent = Intent(this.context, ComicDetails::class.java)
+            intent.putExtra("Comic", it)
+            startActivity(intent)
         }
 
         recyclerView.apply {
@@ -85,7 +89,6 @@ class ComicsFragment : Fragment() {
     private fun showResult(list: List<ComicModel>?) {
         showLoading(false)
         list?.let { _comics.addAll(it) }
-        _comics = _comics.distinctBy { it.title }.toMutableList()
         listNotFound(_comics.isEmpty())
         _adapter.notifyDataSetChanged()
     }

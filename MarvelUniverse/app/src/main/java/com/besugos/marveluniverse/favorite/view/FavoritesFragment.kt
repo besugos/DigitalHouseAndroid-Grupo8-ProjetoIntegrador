@@ -128,7 +128,6 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    @SuppressLint("InflateParams")
     private fun createModal(favorite: FavoriteModel) {
         val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutView = inflater.inflate(R.layout.character_detail, null)
