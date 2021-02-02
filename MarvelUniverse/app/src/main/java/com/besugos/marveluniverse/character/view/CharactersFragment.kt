@@ -2,7 +2,6 @@ package com.besugos.marveluniverse.character.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +24,7 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
 import com.besugos.marveluniverse.home.model.ComicSummaryModel
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -37,6 +38,8 @@ class CharactersFragment : Fragment() {
     private lateinit var _adapter: CharactersAdapter
     private lateinit var eventsAdapter: CharactersEventsAdapter
     private lateinit var comicsAdapter: CharactersComicsAdapter
+
+    private val _sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _listCharacters = mutableListOf<CharacterModel>()
     private var _searchByName: String? = null
@@ -171,6 +174,7 @@ class CharactersFragment : Fragment() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun createModal(character: CharacterModel) {
         val inflater =
             _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -277,6 +281,7 @@ class CharactersFragment : Fragment() {
                     viewLifecycleOwner, Observer { wasUnlocked ->
                         if (wasUnlocked) {
                             btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                            favoritesInsertDispatcher()
                         }
                     }
                 )
@@ -285,11 +290,16 @@ class CharactersFragment : Fragment() {
                     viewLifecycleOwner, Observer { wasUnlocked ->
                         if (wasUnlocked) {
                             btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+                            favoritesInsertDispatcher()
                         }
                     }
                 )
             }
         }
+    }
+
+    private fun favoritesInsertDispatcher() {
+        _sharedViewModel.setFlag()
     }
 
 }
