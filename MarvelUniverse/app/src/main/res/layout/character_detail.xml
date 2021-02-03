@@ -76,6 +76,19 @@
                         app:tint="@color/white"
                         tools:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
+                    <ImageButton
+                        android:id="@+id/btnShareCharacter"
+                        android:layout_width="@dimen/dim_32_dp"
+                        android:layout_height="@dimen/dim_32_dp"
+                        android:layout_marginTop="@dimen/dim_8_dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:clickable="true"
+                        android:contentDescription="@string/icon_heart"
+                        android:focusable="true"
+                        android:gravity="end"
+                        app:srcCompat="@drawable/ic_baseline_share_24"
+                        app:tint="@color/white" />
+
                 </LinearLayout>
 
                 <ImageView

@@ -2,6 +2,7 @@ package com.besugos.marveluniverse.character.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -204,7 +205,7 @@ class CharactersFragment : Fragment() {
 
         val listEvents = mutableListOf<EventSummaryModel>()
         val eventsDetails = character.events?.items
-        eventsDetails?.forEach() {
+        eventsDetails?.forEach {
             listEvents.add(it)
         }
 
@@ -228,7 +229,7 @@ class CharactersFragment : Fragment() {
 
         val listComics = mutableListOf<ComicSummaryModel>()
         val comicsDetails = character.comics?.items
-        comicsDetails?.forEach() {
+        comicsDetails?.forEach {
             listComics.add(it)
         }
 
@@ -243,6 +244,20 @@ class CharactersFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = comicsManager
             adapter = eventsAdapter
+        }
+
+        layoutView.findViewById<ImageButton>(R.id.btnShareCharacter).setOnClickListener{
+            val wikiUrl = character.urls?.first { it.type == "wiki" }
+            val url = wikiUrl?.url
+                ?: ((character.urls?.first { it.type == "detail" } ?: "https://www.marvel.com") as String)
+
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL")
+            intent.putExtra( Intent.EXTRA_TEXT, url)
+            startActivity(Intent.createChooser(intent, "Share URL"))
+
         }
 
 
