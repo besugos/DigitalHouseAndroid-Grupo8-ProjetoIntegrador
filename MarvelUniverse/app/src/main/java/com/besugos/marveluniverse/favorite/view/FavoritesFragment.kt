@@ -11,8 +11,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
@@ -21,6 +23,7 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 
@@ -28,8 +31,10 @@ import com.squareup.picasso.Picasso
 class FavoritesFragment : Fragment() {
 
     private lateinit var _myView: View
-    private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var _adapter: FavoriteAdapter
+
+    private lateinit var _favoriteViewModel: FavoriteViewModel
+    private val _sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _listFavorites = mutableListOf<FavoriteModel>()
     private var _searchByName: String? = null
@@ -48,6 +53,7 @@ class FavoritesFragment : Fragment() {
         _myView = view
         initialSearch()
         initSearchView()
+        favoritesInsertListener()
 
     }
 
@@ -63,6 +69,7 @@ class FavoritesFragment : Fragment() {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = manager
+            addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
             adapter = _adapter
         }
 
@@ -74,6 +81,7 @@ class FavoritesFragment : Fragment() {
         ).get(FavoriteViewModel::class.java)
 
         _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
+            _listFavorites.clear()
             showResult(it)
         })
 
@@ -126,6 +134,28 @@ class FavoritesFragment : Fragment() {
         } else {
             _myView.findViewById<View>(R.id.layoutNotFound).visibility = View.GONE
         }
+    }
+
+    private fun favoritesInsertListener() {
+        _sharedViewModel.flag.observe(viewLifecycleOwner, Observer {
+
+            if(_searchByName == null) {
+                _favoriteViewModel.getFavorites().observe(
+                    viewLifecycleOwner, Observer {
+                        _listFavorites.clear()
+                        showResult(it)
+                    }
+                )
+            } else {
+                _favoriteViewModel.getFavoritesByName(_searchByName).observe(
+                    viewLifecycleOwner, Observer {
+                        _listFavorites.clear()
+                        showResult(it)
+                    }
+                )
+            }
+
+        })
     }
 
     @SuppressLint("InflateParams")

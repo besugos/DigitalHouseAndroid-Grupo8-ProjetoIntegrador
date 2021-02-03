@@ -76,6 +76,12 @@
             android:padding="@dimen/dim_25_dp"
             android:gravity="center_vertical">
 
+            <ImageView
+            android:id="@+id/imgUser"
+                android:layout_height="@dimen/dim_48_dp"
+                android:layout_width="@dimen/dim_48_dp"
+                />
+
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="match_parent"
@@ -107,11 +113,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:text="@string/heroes"
-                style="@style/Widget.MaterialComponents.Button.TextButton" />
+                android:layout_marginTop="@dimen/dim_25_dp"
+                android:paddingStart="@dimen/dim_25_dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                />
             <Button
                 android:id="@+id/btnNavigateToEvents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dim_25_dp"
                 android:gravity="start"
                 android:text="@string/events"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
@@ -119,6 +129,7 @@
                 android:id="@+id/btnNavigateToComics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dim_25_dp"
                 android:gravity="start"
                 android:text="@string/comics"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
@@ -126,6 +137,7 @@
                 android:id="@+id/btnNavigateToFavs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dim_25_dp"
                 android:gravity="start"
                 android:text="@string/favorites"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
