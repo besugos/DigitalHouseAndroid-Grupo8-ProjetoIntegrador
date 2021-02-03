@@ -1,9 +1,7 @@
 package com.besugos.marveluniverse.home.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
 
 @Parcelize
 data class CharacterSummaryModel (
@@ -29,4 +27,4 @@ data class EventSummaryModel (
 data class ComicSummaryModel (
     val resourceURI: String?,
     val name: String?
-): Parcelable 
+): Parcelable

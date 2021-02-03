@@ -65,7 +65,6 @@ class ComicsFragment : Fragment() {
         _comics = mutableListOf()
         _adapter = ComicAdapter(_comics) {
             val intent = Intent(this.context, ComicDetails::class.java)
-//            val bundle = bundleOf("COMIC" to it as ComicModel)
             intent.putExtra("Comic", it)
             startActivity(intent)
         }
@@ -166,76 +165,6 @@ class ComicsFragment : Fragment() {
         } else {
             _view.findViewById<View>(R.id.layoutNotFoundComic).visibility = View.GONE
         }
-    }
-
-    private fun createModal(_comic: ComicModel) {
-        val inflater =
-            _view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val layoutView = inflater.inflate(R.layout.comic_detail, null)
-        val alertDialog = BottomSheetDialog(_view.context)
-
-        val txtTitleComicDetail = layoutView.findViewById<TextView>(R.id.txtTitleComicDetail)
-        val imgComicDetail = layoutView.findViewById<ImageView>(R.id.imgComicDetail)
-        val txtDescriptionComicDetail =
-            layoutView.findViewById<TextView>(R.id.txtDescriptionComicDetail)
-
-        txtTitleComicDetail.text = _comic.title
-
-        Picasso.get()
-            .load(_comic.thumbnail?.getThumb(IMG_RESOLUTION_FANTASTIC))
-            .into(imgComicDetail)
-
-        val recyclerViewEvents = layoutView.findViewById<RecyclerView>(R.id.comicDetailsEventList)
-        val eventsManager =
-            LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
-
-        val listEvents = mutableListOf<EventSummaryModel>()
-        val eventsDetails = _comic.events?.items
-        eventsDetails?.forEach() {
-            listEvents.add(it)
-        }
-
-        eventsAdapter = ComicEventsAdapter(listEvents)
-
-        recyclerViewEvents?.apply {
-            setHasFixedSize(true)
-            layoutManager = eventsManager
-            adapter = eventsAdapter
-        }
-
-        val recyclerViewCharacters =
-            layoutView.findViewById<RecyclerView>(R.id.comicDetailsCharacterList)
-        val charactersManager =
-            LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
-
-        val listCharacters = mutableListOf<CharacterSummaryModel>()
-        val charactersDetails = _comic.characters?.items
-        charactersDetails?.forEach() {
-            listCharacters.add(it)
-        }
-
-        charactersAdapter = ComicCharactersAdapter(listCharacters)
-
-        recyclerViewCharacters?.apply {
-            setHasFixedSize(true)
-            layoutManager = charactersManager
-            adapter = charactersAdapter
-        }
-
-        alertDialog.apply {
-            setContentView(layoutView)
-            show()
-        }
-
-
-
-        if (_comic.description.isNullOrEmpty()) {
-            txtDescriptionComicDetail.text =
-                _view.context.getString(R.string.comic_description_not_found)
-        } else {
-            txtDescriptionComicDetail.text = _comic.description
-        }
-
     }
 
 }

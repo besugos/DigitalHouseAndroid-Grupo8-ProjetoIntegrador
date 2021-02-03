@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_avangers_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".comic.view.ComicDetails" ></activity>
+        <activity android:name=".character.view.CharacterDetailsActivity"></activity>
+        <activity android:name=".comic.view.ComicDetails" />
         <activity
             android:name=".login.view.FacebookLoginActivity"
             android:parentActivityName=".login.view.LoginActivity" />
