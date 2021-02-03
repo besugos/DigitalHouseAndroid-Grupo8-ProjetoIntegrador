@@ -65,6 +65,7 @@ class ComicsFragment : Fragment() {
         _comics = mutableListOf()
         _adapter = ComicAdapter(_comics) {
             val intent = Intent(this.context, ComicDetails::class.java)
+//            val bundle = bundleOf("COMIC" to it as ComicModel)
             intent.putExtra("Comic", it)
             startActivity(intent)
         }

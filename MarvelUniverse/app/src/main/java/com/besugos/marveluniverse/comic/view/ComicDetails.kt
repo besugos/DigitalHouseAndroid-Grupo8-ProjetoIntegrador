@@ -23,8 +23,10 @@ class ComicDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic_details)
 
+        supportActionBar?.hide()
 
-        _comic = intent.getBundleExtra("COMIC") as ComicModel
+        val info = intent.getParcelableExtra<ComicModel>("Comic")
+        _comic = info!!
 
 
         val txtTitleComicDetail = this.findViewById<TextView>(R.id.txtTitleComicDetail)
