@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".comic.view.ComicDetails">
+    tools:context=".event.view.EventDetailsActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -12,7 +12,6 @@
         android:layout_gravity="bottom|center"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/dim_0_dp">
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -47,13 +46,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dim_8_dp"
-                        android:layout_marginTop="@dimen/dim_10_dp"
+                        android:layout_marginTop="@dimen/dim_5_dp"
                         android:layout_marginEnd="@dimen/dim_8_dp"
                         android:layout_marginBottom="@dimen/dim_5_dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/txtTitleComicDetail"
+                            android:id="@+id/txtNameEventDetails"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -61,33 +60,47 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/dim_28_sp"
                             android:textStyle="bold"
-                            tools:text="@string/comic_title" />
+                            tools:text="@string/event_name" />
+
+                        <TextView
+                            android:id="@+id/txtEventYearDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dim_8_dp"
+                            android:layout_marginEnd="@dimen/dim_8_dp"
+                            android:layout_marginBottom="@dimen/dim_25_dp"
+                            android:text="@string/start_year_end_year"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dim_20_sp"
+                            tools:text="@string/start_year_end_year" />
+
 
                     </LinearLayout>
 
+
                     <ImageView
-                        android:id="@+id/imgComicDetail"
+                        android:id="@+id/imgAvatarEventDetails"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:contentDescription="@string/avatar_hero"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/img3" />
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/img2" />
 
                     <TextView
-                        android:id="@+id/txtDescriptionComicDetail"
+                        android:id="@+id/txtDescriptionEventDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dim_8_dp"
                         android:layout_marginTop="@dimen/dim_25_dp"
                         android:layout_marginEnd="@dimen/dim_8_dp"
-                        android:layout_marginBottom="@dimen/dim_20_dp"
+                        android:layout_marginBottom="@dimen/dim_35_dp"
                         android:text="@string/event_description"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dim_20_sp"
-                        tools:text="@string/comic_description" />
+                        tools:text="@string/event_description" />
 
                     <TextView
-                        android:id="@+id/txtCharacterComicDetails"
+                        android:id="@+id/txtCharacterEventDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dim_8_dp"
@@ -97,32 +110,30 @@
                         android:text="@string/characters"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dim_20_sp"
-                        android:textStyle="bold"
-                        tools:text="Characters" />
+                        android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/comicDetailsCharacterList"/>
+                        android:id="@+id/eventDetailsCharacterList"/>
 
                     <TextView
-                        android:id="@+id/txtEventComicDetails"
+                        android:id="@+id/txtComicEventDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dim_8_dp"
                         android:layout_marginEnd="@dimen/dim_8_dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="@string/events"
+                        android:text="@string/comics"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dim_20_sp"
-                        android:textStyle="bold"
-                        tools:text="@string/events" />
+                        android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/comicDetailsEventList"/>
+                        android:id="@+id/eventDetailsComicList"/>
 
                 </LinearLayout>
 

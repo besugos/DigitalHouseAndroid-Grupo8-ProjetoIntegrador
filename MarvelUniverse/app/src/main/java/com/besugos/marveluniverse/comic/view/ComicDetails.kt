@@ -2,6 +2,7 @@ package com.besugos.marveluniverse.comic.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,9 +26,7 @@ class ComicDetails : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val info = intent.getParcelableExtra<ComicModel>("Comic")
-        _comic = info!!
-
+        _comic= intent.getParcelableExtra<ComicModel>("Comic")!!
 
         val txtTitleComicDetail = this.findViewById<TextView>(R.id.txtTitleComicDetail)
         val imgComicDetail = this.findViewById<ImageView>(R.id.imgComicDetail)
@@ -50,6 +49,11 @@ class ComicDetails : AppCompatActivity() {
             listEvents.add(it)
         }
 
+        if (listEvents.isNullOrEmpty()) {
+            val txtEvent = this.findViewById<TextView>(R.id.txtEventComicDetails)
+            txtEvent.visibility = View.GONE
+        }
+
         eventsAdapter = ComicEventsAdapter(listEvents)
 
         recyclerViewEvents?.apply {
@@ -67,6 +71,11 @@ class ComicDetails : AppCompatActivity() {
         val charactersDetails = _comic.characters?.items
         charactersDetails?.forEach() {
             listCharacters.add(it)
+        }
+
+        if (listCharacters.isNullOrEmpty()) {
+            val txtCharacters = this.findViewById<TextView>(R.id.txtCharacterComicDetails)
+            txtCharacters.visibility = View.GONE
         }
 
         charactersAdapter = ComicCharactersAdapter(listCharacters)
