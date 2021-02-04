@@ -1,6 +1,7 @@
 package com.besugos.marveluniverse.comic.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -63,7 +65,9 @@ class ComicsFragment : Fragment() {
 
         _comics = mutableListOf()
         _adapter = ComicAdapter(_comics) {
-            createModal(it)
+            val intent = Intent(this.context, ComicDetails::class.java)
+            intent.putExtra("Comic", it)
+            startActivity(intent)
         }
 
         recyclerView.apply {
@@ -87,7 +91,6 @@ class ComicsFragment : Fragment() {
     private fun showResult(list: List<ComicModel>?) {
         showLoading(false)
         list?.let { _comics.addAll(it) }
-        _comics = _comics.distinctBy { it.title }.toMutableList()
         listNotFound(_comics.isEmpty())
         _adapter.notifyDataSetChanged()
     }
@@ -164,76 +167,6 @@ class ComicsFragment : Fragment() {
         } else {
             _view.findViewById<View>(R.id.layoutNotFoundComic).visibility = View.GONE
         }
-    }
-
-    private fun createModal(_comic: ComicModel) {
-        val inflater =
-            _view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val layoutView = inflater.inflate(R.layout.comic_detail, null)
-        val alertDialog = BottomSheetDialog(_view.context)
-
-        val txtTitleComicDetail = layoutView.findViewById<TextView>(R.id.txtTitleComicDetail)
-        val imgComicDetail = layoutView.findViewById<ImageView>(R.id.imgComicDetail)
-        val txtDescriptionComicDetail =
-            layoutView.findViewById<TextView>(R.id.txtDescriptionComicDetail)
-
-        txtTitleComicDetail.text = _comic.title
-
-        Picasso.get()
-            .load(_comic.thumbnail?.getThumb(IMG_RESOLUTION_FANTASTIC))
-            .into(imgComicDetail)
-
-        val recyclerViewEvents = layoutView.findViewById<RecyclerView>(R.id.comicDetailsEventList)
-        val eventsManager =
-            LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
-
-        val listEvents = mutableListOf<EventSummaryModel>()
-        val eventsDetails = _comic.events?.items
-        eventsDetails?.forEach() {
-            listEvents.add(it)
-        }
-
-        eventsAdapter = ComicEventsAdapter(listEvents)
-
-        recyclerViewEvents?.apply {
-            setHasFixedSize(true)
-            layoutManager = eventsManager
-            adapter = eventsAdapter
-        }
-
-        val recyclerViewCharacters =
-            layoutView.findViewById<RecyclerView>(R.id.comicDetailsCharacterList)
-        val charactersManager =
-            LinearLayoutManager(alertDialog.context, LinearLayoutManager.HORIZONTAL, false)
-
-        val listCharacters = mutableListOf<CharacterSummaryModel>()
-        val charactersDetails = _comic.characters?.items
-        charactersDetails?.forEach() {
-            listCharacters.add(it)
-        }
-
-        charactersAdapter = ComicCharactersAdapter(listCharacters)
-
-        recyclerViewCharacters?.apply {
-            setHasFixedSize(true)
-            layoutManager = charactersManager
-            adapter = charactersAdapter
-        }
-
-        alertDialog.apply {
-            setContentView(layoutView)
-            show()
-        }
-
-
-
-        if (_comic.description.isNullOrEmpty()) {
-            txtDescriptionComicDetail.text =
-                _view.context.getString(R.string.comic_description_not_found)
-        } else {
-            txtDescriptionComicDetail.text = _comic.description
-        }
-
     }
 
 }

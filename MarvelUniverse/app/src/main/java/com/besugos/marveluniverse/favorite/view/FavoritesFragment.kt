@@ -2,6 +2,7 @@ package com.besugos.marveluniverse.favorite.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -63,7 +64,9 @@ class FavoritesFragment : Fragment() {
 
         _listFavorites = mutableListOf()
         _adapter = FavoriteAdapter(_listFavorites){
-            createModal(it)
+            val intent = Intent(this.context, FavoriteDetailActivity::class.java)
+            intent.putExtra("Favorite", it)
+            startActivity(intent)
         }
 
         recyclerView.apply {

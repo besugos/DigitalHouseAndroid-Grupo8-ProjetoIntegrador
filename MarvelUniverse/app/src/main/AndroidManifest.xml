@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_avangers_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".favorite.view.FavoriteDetailActivity"></activity>
+        <activity android:name=".event.view.EventDetailsActivity" />
+        <activity android:name=".character.view.CharacterDetailsActivity" />
+        <activity android:name=".comic.view.ComicDetails" />
         <activity
             android:name=".login.view.TermsActivity"
             android:parentActivityName=".login.view.RegisterActivity" />
@@ -26,22 +30,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/Register" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Register" />
         <activity android:name=".login.view.LoginActivity" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
-            <intent-filter> <action android:name="android.intent.action.VIEW" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter> </activity>
 
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,13 +1,16 @@
 package com.besugos.marveluniverse.event.model
 
+import android.os.Parcelable
 import com.besugos.marveluniverse.data.model.ImageModel
 import com.besugos.marveluniverse.data.model.UrlModel
 import com.besugos.marveluniverse.home.model.CharacterListModel
 import com.besugos.marveluniverse.home.model.ComicListModel
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 import com.besugos.marveluniverse.home.model.StoryListModel
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
+@Parcelize
 data class EventModel (
     val id: Int?,
     val title: String?,
@@ -23,4 +26,4 @@ data class EventModel (
     val comics: ComicListModel?,
     val next: EventSummaryModel?,
     val previous: EventSummaryModel?
-): Serializable
+): Parcelable

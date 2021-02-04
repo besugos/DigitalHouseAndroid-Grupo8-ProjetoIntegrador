@@ -1,6 +1,7 @@
 package com.besugos.marveluniverse.event.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,7 +67,9 @@ class EventsFragment : Fragment() {
 
         _listEvent = mutableListOf()
         _adapter = EventAdapter(_listEvent) {
-            createModal(it)
+            val intent = Intent(this.context, EventDetailsActivity::class.java)
+            intent.putExtra("Event", it)
+            startActivity(intent)
         }
 
         recyclerView.apply {
@@ -166,87 +169,6 @@ class EventsFragment : Fragment() {
         } else {
             _view.findViewById<View>(R.id.layoutNotFound).visibility = View.GONE
         }
-    }
-
-    private fun createModal(event: EventModel) {
-        val inflater = _view.context
-            .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val layoutView = inflater.inflate(R.layout.events_detail, null)
-        val alertaDialog = BottomSheetDialog(_view.context)
-
-        val eventName = layoutView.findViewById<TextView>(R.id.txtNameEventDetails)
-
-        eventName.text = event.title
-
-        val eventDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionEventDetails)
-
-        if (event.description.isNullOrEmpty()) {
-            eventDescription.text = "Oops, no description for this hero :("
-        } else {
-            eventDescription.text = event.description
-        }
-
-        val imgUrl = event.thumbnail!!.getThumb("standard_fantastic")
-
-        val eventImage = layoutView.findViewById<ImageView>(R.id.imgAvatarEventDetails)
-
-        Picasso.get()
-            .load(imgUrl)
-            .into(eventImage)
-
-        val duration = layoutView.findViewById<TextView>(R.id.txtEventYearDetails)
-
-        if (event.start.isNullOrEmpty() || event.end.isNullOrEmpty()) {
-            duration.text = layoutView.context.getString(R.string.ops_not_available)
-        } else {
-            val startDate = event.start?.substring(0, 7)
-            val endDate = event.end?.substring(0, 7)
-            duration.text = "${startDate} - ${endDate}"
-        }
-
-        val recyclerViewCharacters =
-            layoutView.findViewById<RecyclerView>(R.id.eventDetailsCharacterList)
-        val charactersManager =
-            LinearLayoutManager(alertaDialog.context, LinearLayoutManager.HORIZONTAL, false)
-
-        val listCharacters = mutableListOf<CharacterSummaryModel>()
-        val characterDetails = event.characters?.items
-        characterDetails?.forEach() {
-            listCharacters.add(it)
-        }
-
-        characterAdapter = EventCharactersAdapter(listCharacters)
-
-        recyclerViewCharacters?.apply {
-            setHasFixedSize(true)
-            layoutManager = charactersManager
-            adapter = characterAdapter
-        }
-
-        val recyclerViewComics =
-            layoutView.findViewById<RecyclerView>(R.id.eventDetailsComicList)
-        val comicsManager =
-            LinearLayoutManager(alertaDialog.context, LinearLayoutManager.HORIZONTAL, false)
-
-        val listComics = mutableListOf<ComicSummaryModel>()
-        val comicDetails = event.comics?.items
-        comicDetails?.forEach() {
-            listComics.add(it)
-        }
-
-        comicsAdapter = EventComicAdapter(listComics)
-
-        recyclerViewComics?.apply {
-            setHasFixedSize(true)
-            layoutManager = comicsManager
-            adapter = comicsAdapter
-        }
-
-        alertaDialog.apply {
-            setContentView(layoutView)
-            show()
-        }
-
     }
 }
 

@@ -1,24 +1,25 @@
 package com.besugos.marveluniverse.character.view
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.SearchView
+
+import androidx.fragment.app.Fragment
+
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
+import com.besugos.marveluniverse.character.model.CharacterModel
 import com.besugos.marveluniverse.character.repository.CharacterRepository
 import com.besugos.marveluniverse.character.viewmodel.CharacterViewModel
 import com.besugos.marveluniverse.character.model.CharacterModel
@@ -33,13 +34,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 
 
+
 class CharactersFragment : Fragment() {
 
     private lateinit var _myView: View
     private lateinit var _characterViewModel: CharacterViewModel
     private lateinit var _adapter: CharactersAdapter
-    private lateinit var eventsAdapter: CharactersEventsAdapter
-    private lateinit var comicsAdapter: CharactersComicsAdapter
 
     private val _sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -73,7 +73,10 @@ class CharactersFragment : Fragment() {
 
         _listCharacters = mutableListOf()
         _adapter = CharactersAdapter(_listCharacters) {
-            createModal(it)
+            val intent = Intent(this.context, CharacterDetailsActivity::class.java)
+            intent.putExtra("Character", it)
+            startActivity(intent)
+
         }
 
         recyclerView.apply {
@@ -318,5 +321,6 @@ class CharactersFragment : Fragment() {
     private fun favoritesInsertDispatcher() {
         _sharedViewModel.setFlag()
     }
+
 
 }
