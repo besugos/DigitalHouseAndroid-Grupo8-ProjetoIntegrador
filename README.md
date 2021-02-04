@@ -1,4 +1,4 @@
-<img alt="GoStack" align="center" src="https://i.pinimg.com/originals/58/12/de/5812de28bb80324c5df2e7b081387546.jpg" />
+<img alt="MArvelUniverse" align="center" src="https://i.pinimg.com/originals/58/12/de/5812de28bb80324c5df2e7b081387546.jpg" />
 
 <h1 align="center">
   Marvel Universe
