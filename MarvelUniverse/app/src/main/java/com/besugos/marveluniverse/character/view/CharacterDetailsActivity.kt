@@ -16,6 +16,7 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
 import com.besugos.marveluniverse.home.model.ComicSummaryModel
 import com.besugos.marveluniverse.home.model.EventSummaryModel
 import com.squareup.picasso.Picasso
@@ -25,6 +26,8 @@ class CharacterDetailsActivity : AppCompatActivity() {
     private lateinit var eventsAdapter: CharactersEventsAdapter
     private lateinit var comicsAdapter: CharactersComicsAdapter
     private lateinit var character: CharacterModel
+
+//    private val _sharedViewModel: SharedViewModel = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,6 +136,7 @@ class CharacterDetailsActivity : AppCompatActivity() {
                     this, Observer { wasUnlocked ->
                         if (wasUnlocked) {
                             btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+//                            favoritesInsertDispatcher()
                         }
                     }
                 )
@@ -141,6 +145,7 @@ class CharacterDetailsActivity : AppCompatActivity() {
                     this, Observer { wasUnlocked ->
                         if (wasUnlocked) {
                             btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+//                            favoritesInsertDispatcher()
                         }
                     }
                 )
@@ -149,4 +154,7 @@ class CharacterDetailsActivity : AppCompatActivity() {
 
 
     }
+//    private fun favoritesInsertDispatcher() {
+//        _sharedViewModel.setFlag()
+//    }
 }
