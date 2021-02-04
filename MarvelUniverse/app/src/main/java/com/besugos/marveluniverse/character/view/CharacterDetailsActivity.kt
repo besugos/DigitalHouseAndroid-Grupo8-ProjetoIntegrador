@@ -1,5 +1,6 @@
 package com.besugos.marveluniverse.character.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -100,6 +101,20 @@ class CharacterDetailsActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = comicsManager
             adapter = eventsAdapter
+        }
+
+        findViewById<ImageButton>(R.id.btnShareCharacter).setOnClickListener{
+            val wikiUrl = character.urls?.first { it.type == "wiki" }
+            val url = wikiUrl?.url
+                ?: ((character.urls?.first { it.type == "detail" } ?: "https://www.marvel.com") as String)
+
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL")
+            intent.putExtra( Intent.EXTRA_TEXT, url)
+            startActivity(Intent.createChooser(intent, "Share URL"))
+
         }
 
 
