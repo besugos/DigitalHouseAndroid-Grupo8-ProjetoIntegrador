@@ -66,7 +66,7 @@ $ git clone https://github.com/besugos/DigitalHouseAndroid-Grupo8-ProjetoIntegra
 ### :palms_up_together: Contributing
 You are totally allowed to contribute with this project. To do that, fork this repository, make your changes and create a pull request.
 
-<h4 align="center">
+<h4 align="left">
     Made with :coffee: by <a href="https://www.linkedin.com/in/emanuel-tavares-30a440163/" target="_blank">Emanuel Tavares</a> <br>
     Made with :coffee: by <a href="https://www.linkedin.com/in/gabrielaraujoz/" target="_blank">Gabriel Araujo</a> <br>
     Made with :coffee: by <a href="https://www.linkedin.com/in/wendel-bandeira-614a01109/" target="_blank">Wendel Bandeira</a> 
