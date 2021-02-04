@@ -2,6 +2,7 @@ package com.besugos.marveluniverse.favorite.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -57,7 +58,9 @@ class FavoritesFragment : Fragment() {
 
         _listFavorites = mutableListOf()
         _adapter = FavoriteAdapter(_listFavorites){
-            createModal(it)
+            val intent = Intent(this.context, FavoriteDetailActivity::class.java)
+            intent.putExtra("Favorite", it)
+            startActivity(intent)
         }
 
         recyclerView.apply {
@@ -128,55 +131,55 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    private fun createModal(favorite: FavoriteModel) {
-        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val layoutView = inflater.inflate(R.layout.character_detail, null)
-        val modal = BottomSheetDialog(_myView.context)
-
-        val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
-        characterName.text = favorite.name
-
-        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
-        characterDescription.text =
-            if (favorite.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
-            else favorite.description
-
-        val imgHero = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
-        Picasso.get()
-            .load(ImageModel(favorite.path!!, favorite.extension!!).getThumb("standard_fantastic"))
-            .into(imgHero)
-
-        val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
-        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-
-        modal.apply {
-            setContentView(layoutView)
-            show()
-        }
-
-        btnToggleFavorite.setOnClickListener {
-            _favoriteViewModel.removeFavorite(favorite).observe(
-                viewLifecycleOwner, Observer { wasRemoved ->
-                    if(wasRemoved) {
-                        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-                        modal.closeOptionsMenu()
-                        if(_searchByName != null) {
-                            _favoriteViewModel.getFavoritesByName(_searchByName).observe(viewLifecycleOwner, Observer {
-                                _listFavorites.clear()
-                                showResult(it)
-                                modal.dismiss()
-                            })
-                        } else {
-                            _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
-                                _listFavorites.clear()
-                                showResult(it)
-                                modal.dismiss()
-                            })
-                        }
-                    }
-                }
-            )
-        }
-    }
+//    private fun createModal(favorite: FavoriteModel) {
+//        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val layoutView = inflater.inflate(R.layout.character_detail, null)
+//        val modal = BottomSheetDialog(_myView.context)
+//
+//        val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
+//        characterName.text = favorite.name
+//
+//        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
+//        characterDescription.text =
+//            if (favorite.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
+//            else favorite.description
+//
+//        val imgHero = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
+//        Picasso.get()
+//            .load(ImageModel(favorite.path!!, favorite.extension!!).getThumb("standard_fantastic"))
+//            .into(imgHero)
+//
+//        val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
+//        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+//
+//        modal.apply {
+//            setContentView(layoutView)
+//            show()
+//        }
+//
+//        btnToggleFavorite.setOnClickListener {
+//            _favoriteViewModel.removeFavorite(favorite).observe(
+//                viewLifecycleOwner, Observer { wasRemoved ->
+//                    if(wasRemoved) {
+//                        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+//                        modal.closeOptionsMenu()
+//                        if(_searchByName != null) {
+//                            _favoriteViewModel.getFavoritesByName(_searchByName).observe(viewLifecycleOwner, Observer {
+//                                _listFavorites.clear()
+//                                showResult(it)
+//                                modal.dismiss()
+//                            })
+//                        } else {
+//                            _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
+//                                _listFavorites.clear()
+//                                showResult(it)
+//                                modal.dismiss()
+//                            })
+//                        }
+//                    }
+//                }
+//            )
+//        }
+//    }
 
 }

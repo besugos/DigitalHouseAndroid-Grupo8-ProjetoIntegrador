@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_avangers_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".event.view.EventDetailsActivity"></activity>
+        <activity android:name=".favorite.view.FavoriteDetailActivity"></activity>
+        <activity android:name=".event.view.EventDetailsActivity" />
         <activity android:name=".character.view.CharacterDetailsActivity" />
         <activity android:name=".comic.view.ComicDetails" />
         <activity
