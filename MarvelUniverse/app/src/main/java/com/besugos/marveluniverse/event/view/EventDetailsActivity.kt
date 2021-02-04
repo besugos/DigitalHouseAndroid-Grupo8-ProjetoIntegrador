@@ -50,7 +50,7 @@ class EventDetailsActivity : AppCompatActivity() {
         val duration = this.findViewById<TextView>(R.id.txtEventYearDetails)
 
         if (event.start.isNullOrEmpty() || event.end.isNullOrEmpty()) {
-            duration.text = this.getString(R.string.ops_not_available)
+            duration.visibility = View.GONE
         } else {
             val startDate = event.start?.substring(0, 7)
             val endDate = event.end?.substring(0, 7)
