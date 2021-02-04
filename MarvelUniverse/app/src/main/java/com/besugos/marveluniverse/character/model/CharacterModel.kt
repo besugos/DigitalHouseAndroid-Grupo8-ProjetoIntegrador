@@ -17,7 +17,7 @@ data class CharacterModel(
     val description: String?,
     val modified: Date?,
     val resourceURI: String?,
-    val url: UrlModel?,
+    val urls: List<UrlModel>?,
     val thumbnail: ImageModel?,
     val stories: StoryListModel?,
     val events: EventListModel?,

@@ -12,8 +12,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
@@ -22,6 +24,7 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
+import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 
@@ -29,8 +32,10 @@ import com.squareup.picasso.Picasso
 class FavoritesFragment : Fragment() {
 
     private lateinit var _myView: View
-    private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var _adapter: FavoriteAdapter
+
+    private lateinit var _favoriteViewModel: FavoriteViewModel
+    private val _sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _listFavorites = mutableListOf<FavoriteModel>()
     private var _searchByName: String? = null
@@ -49,6 +54,7 @@ class FavoritesFragment : Fragment() {
         _myView = view
         initialSearch()
         initSearchView()
+        favoritesInsertListener()
 
     }
 
@@ -66,6 +72,7 @@ class FavoritesFragment : Fragment() {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = manager
+            addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
             adapter = _adapter
         }
 
@@ -77,6 +84,7 @@ class FavoritesFragment : Fragment() {
         ).get(FavoriteViewModel::class.java)
 
         _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
+            _listFavorites.clear()
             showResult(it)
         })
 
@@ -131,55 +139,78 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-//    private fun createModal(favorite: FavoriteModel) {
-//        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//        val layoutView = inflater.inflate(R.layout.character_detail, null)
-//        val modal = BottomSheetDialog(_myView.context)
-//
-//        val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
-//        characterName.text = favorite.name
-//
-//        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
-//        characterDescription.text =
-//            if (favorite.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
-//            else favorite.description
-//
-//        val imgHero = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
-//        Picasso.get()
-//            .load(ImageModel(favorite.path!!, favorite.extension!!).getThumb("standard_fantastic"))
-//            .into(imgHero)
-//
-//        val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
-//        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-//
-//        modal.apply {
-//            setContentView(layoutView)
-//            show()
-//        }
-//
-//        btnToggleFavorite.setOnClickListener {
-//            _favoriteViewModel.removeFavorite(favorite).observe(
-//                viewLifecycleOwner, Observer { wasRemoved ->
-//                    if(wasRemoved) {
-//                        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-//                        modal.closeOptionsMenu()
-//                        if(_searchByName != null) {
-//                            _favoriteViewModel.getFavoritesByName(_searchByName).observe(viewLifecycleOwner, Observer {
-//                                _listFavorites.clear()
-//                                showResult(it)
-//                                modal.dismiss()
-//                            })
-//                        } else {
-//                            _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
-//                                _listFavorites.clear()
-//                                showResult(it)
-//                                modal.dismiss()
-//                            })
-//                        }
-//                    }
-//                }
-//            )
-//        }
-//    }
+    private fun favoritesInsertListener() {
+        _sharedViewModel.flag.observe(viewLifecycleOwner, Observer {
+
+            if(_searchByName == null) {
+                _favoriteViewModel.getFavorites().observe(
+                    viewLifecycleOwner, Observer {
+                        _listFavorites.clear()
+                        showResult(it)
+                    }
+                )
+            } else {
+                _favoriteViewModel.getFavoritesByName(_searchByName).observe(
+                    viewLifecycleOwner, Observer {
+                        _listFavorites.clear()
+                        showResult(it)
+                    }
+                )
+            }
+
+        })
+    }
+
+    @SuppressLint("InflateParams")
+    private fun createModal(favorite: FavoriteModel) {
+        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layoutView = inflater.inflate(R.layout.character_detail, null)
+        val modal = BottomSheetDialog(_myView.context)
+
+        val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
+        characterName.text = favorite.name
+
+        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
+        characterDescription.text =
+            if (favorite.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
+            else favorite.description
+
+        val imgHero = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
+        Picasso.get()
+            .load(ImageModel(favorite.path!!, favorite.extension!!).getThumb("standard_fantastic"))
+            .into(imgHero)
+
+        val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
+        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+
+        modal.apply {
+            setContentView(layoutView)
+            show()
+        }
+
+        btnToggleFavorite.setOnClickListener {
+            _favoriteViewModel.removeFavorite(favorite).observe(
+                viewLifecycleOwner, Observer { wasRemoved ->
+                    if(wasRemoved) {
+                        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+                        modal.closeOptionsMenu()
+                        if(_searchByName != null) {
+                            _favoriteViewModel.getFavoritesByName(_searchByName).observe(viewLifecycleOwner, Observer {
+                                _listFavorites.clear()
+                                showResult(it)
+                                modal.dismiss()
+                            })
+                        } else {
+                            _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
+                                _listFavorites.clear()
+                                showResult(it)
+                                modal.dismiss()
+                            })
+                        }
+                    }
+                }
+            )
+        }
+    }
 
 }

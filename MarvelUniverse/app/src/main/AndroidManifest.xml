@@ -16,12 +16,6 @@
         <activity android:name=".character.view.CharacterDetailsActivity" />
         <activity android:name=".comic.view.ComicDetails" />
         <activity
-            android:name=".login.view.FacebookLoginActivity"
-            android:parentActivityName=".login.view.LoginActivity" />
-        <activity
-            android:name=".login.view.GoogleLoginActivity"
-            android:parentActivityName=".login.view.LoginActivity" />
-        <activity
             android:name=".login.view.TermsActivity"
             android:parentActivityName=".login.view.RegisterActivity" />
         <activity

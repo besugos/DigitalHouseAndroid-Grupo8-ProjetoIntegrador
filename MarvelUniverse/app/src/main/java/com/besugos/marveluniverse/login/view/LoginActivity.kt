@@ -75,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithEmail:success")
                             val user = auth.currentUser
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
@@ -83,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "",
+                            Toast.makeText(baseContext, "Login Fail",
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -188,7 +187,6 @@ class LoginActivity : AppCompatActivity() {
                 auth.signOut()
             }
         }
-
     }
 
     private fun irParaHome(uiid: String) {
@@ -227,7 +225,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onCancel() {
-                Toast.makeText(this@LoginActivity, "Cancelado!", Toast.LENGTH_SHORT).show()
+
             }
 
             override fun onError(error: FacebookException) {
