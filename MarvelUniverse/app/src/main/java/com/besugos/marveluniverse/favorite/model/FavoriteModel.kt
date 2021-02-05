@@ -12,12 +12,16 @@ data class FavoriteModel(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
     val id: Int,
+    @ColumnInfo(name = "user_id")
+    val userId: String,
     @ColumnInfo(name = "name")
     val name: String?,
     @ColumnInfo(name = "description")
     val description: String?,
     @ColumnInfo(name = "path")
-    val path: String?,
-    @ColumnInfo(name = "extension")
-    val extension: String?
+    val pathImage: String?,
+    @ColumnInfo(name = "events")
+    val events: String?,
+    @ColumnInfo(name = "comics")
+    val comics: String?
 ) : Parcelable

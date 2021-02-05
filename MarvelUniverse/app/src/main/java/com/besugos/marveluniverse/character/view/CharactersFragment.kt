@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-// import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,7 +16,6 @@ import com.besugos.marveluniverse.R
 import com.besugos.marveluniverse.character.model.CharacterModel
 import com.besugos.marveluniverse.character.repository.CharacterRepository
 import com.besugos.marveluniverse.character.viewmodel.CharacterViewModel
-import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
 
 
 class CharactersFragment : Fragment() {

@@ -1,17 +1,12 @@
 package com.besugos.marveluniverse.favorite.view
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,18 +14,16 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.data.model.ImageModel
 import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
 import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.squareup.picasso.Picasso
-
+import com.google.firebase.auth.FirebaseAuth
 
 class FavoritesFragment : Fragment() {
 
+    private lateinit var _userId: String
     private lateinit var _myView: View
     private lateinit var _adapter: FavoriteAdapter
 
@@ -52,6 +45,7 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _myView = view
+        _userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
         initialSearch()
         initSearchView()
         favoritesInsertListener()
@@ -83,7 +77,7 @@ class FavoritesFragment : Fragment() {
             )
         ).get(FavoriteViewModel::class.java)
 
-        _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
+        _favoriteViewModel.getFavorites(_userId).observe(viewLifecycleOwner, Observer {
             _listFavorites.clear()
             showResult(it)
         })
@@ -106,7 +100,7 @@ class FavoritesFragment : Fragment() {
                 searchCharacter.clearFocus()
                 _searchByName = "$query%"
 
-                _favoriteViewModel.getFavoritesByName(_searchByName).observe(viewLifecycleOwner, Observer {
+                _favoriteViewModel.getFavoritesByName(_userId, _searchByName).observe(viewLifecycleOwner, Observer {
                     _listFavorites.clear()
                     showResult(it)
                 })
@@ -118,7 +112,7 @@ class FavoritesFragment : Fragment() {
                 if (newText.isNullOrEmpty()) {
                     _listFavorites.clear()
                     _searchByName = null
-                    _favoriteViewModel.getFavorites().observe(
+                    _favoriteViewModel.getFavorites(_userId).observe(
                         viewLifecycleOwner, Observer {
                             _listFavorites.clear()
                             showResult(it)
@@ -143,14 +137,14 @@ class FavoritesFragment : Fragment() {
         _sharedViewModel.flag.observe(viewLifecycleOwner, Observer {
 
             if(_searchByName == null) {
-                _favoriteViewModel.getFavorites().observe(
+                _favoriteViewModel.getFavorites(_userId).observe(
                     viewLifecycleOwner, Observer {
                         _listFavorites.clear()
                         showResult(it)
                     }
                 )
             } else {
-                _favoriteViewModel.getFavoritesByName(_searchByName).observe(
+                _favoriteViewModel.getFavoritesByName(_userId, _searchByName).observe(
                     viewLifecycleOwner, Observer {
                         _listFavorites.clear()
                         showResult(it)
@@ -159,58 +153,6 @@ class FavoritesFragment : Fragment() {
             }
 
         })
-    }
-
-    @SuppressLint("InflateParams")
-    private fun createModal(favorite: FavoriteModel) {
-        val inflater = _myView.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val layoutView = inflater.inflate(R.layout.character_detail, null)
-        val modal = BottomSheetDialog(_myView.context)
-
-        val characterName = layoutView.findViewById<TextView>(R.id.txtNameCharacterDetails)
-        characterName.text = favorite.name
-
-        val characterDescription = layoutView.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
-        characterDescription.text =
-            if (favorite.description.isNullOrEmpty()) _myView.context.getText(R.string.character_description_not_found)
-            else favorite.description
-
-        val imgHero = layoutView.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
-        Picasso.get()
-            .load(ImageModel(favorite.path!!, favorite.extension!!).getThumb("standard_fantastic"))
-            .into(imgHero)
-
-        val btnToggleFavorite = layoutView.findViewById<ImageButton>(R.id.btnToggleFavorite)
-        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-
-        modal.apply {
-            setContentView(layoutView)
-            show()
-        }
-
-        btnToggleFavorite.setOnClickListener {
-            _favoriteViewModel.removeFavorite(favorite).observe(
-                viewLifecycleOwner, Observer { wasRemoved ->
-                    if(wasRemoved) {
-                        btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-                        modal.closeOptionsMenu()
-                        if(_searchByName != null) {
-                            _favoriteViewModel.getFavoritesByName(_searchByName).observe(viewLifecycleOwner, Observer {
-                                _listFavorites.clear()
-                                showResult(it)
-                                modal.dismiss()
-                            })
-                        } else {
-                            _favoriteViewModel.getFavorites().observe(viewLifecycleOwner, Observer {
-                                _listFavorites.clear()
-                                showResult(it)
-                                modal.dismiss()
-                            })
-                        }
-                    }
-                }
-            )
-        }
     }
 
 }
