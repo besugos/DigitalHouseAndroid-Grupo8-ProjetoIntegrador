@@ -15,18 +15,18 @@ class FavoriteViewModel(private val repository: FavoriteRepository): ViewModel()
         emit(true)
     }
 
-    fun removeFavorite(favorite: FavoriteModel) = liveData(Dispatchers.IO) {
-        repository.removeFavorite(favorite)
+    fun removeFavorite(favoriteId: Int) = liveData(Dispatchers.IO) {
+        repository.removeFavorite(favoriteId)
         emit(true)
     }
 
-    fun getFavorites() = liveData(Dispatchers.IO) {
-        val favorites = repository.getFavorites()
+    fun getFavorites(userId: String) = liveData(Dispatchers.IO) {
+        val favorites = repository.getFavorites(userId)
         emit(favorites)
     }
 
-    fun getFavoritesByName(nameStartsWith: String? = "") = liveData(Dispatchers.IO) {
-        val favorites = repository.getFavoritesByName(nameStartsWith)
+    fun getFavoritesByName(userId: String,nameStartsWith: String? = "") = liveData(Dispatchers.IO) {
+        val favorites = repository.getFavoritesByName(userId, nameStartsWith)
         emit(favorites)
     }
 

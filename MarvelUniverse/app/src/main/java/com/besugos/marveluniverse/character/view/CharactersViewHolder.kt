@@ -17,7 +17,7 @@ class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(hero: CharacterModel) {
         name.text = hero.name
-        val imgUrl = hero.thumbnail!!.getThumb("standard_small")
+        val imgUrl = hero.thumbnail!!.getThumb("standard_fantastic")
 
         Picasso.get()
             .load(imgUrl)

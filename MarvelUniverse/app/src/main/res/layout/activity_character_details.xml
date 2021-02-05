@@ -50,7 +50,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/txtNameCharacterDetails"
+                        android:id="@+id/txtTitleCharacterDetail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dim_5_dp"
@@ -63,7 +63,7 @@
                         tools:text="@string/character_name" />
 
                     <ImageButton
-                        android:id="@+id/btnToggleFavorite"
+                        android:id="@+id/btnFavCharacterDetail"
                         android:layout_width="@dimen/dim_32_dp"
                         android:layout_height="@dimen/dim_32_dp"
                         android:layout_marginTop="@dimen/dim_8_dp"
@@ -75,7 +75,7 @@
                         tools:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
                     <ImageButton
-                        android:id="@+id/btnShareCharacter"
+                        android:id="@+id/btnShareCharacterDetail"
                         android:layout_width="@dimen/dim_32_dp"
                         android:layout_height="@dimen/dim_32_dp"
                         android:layout_marginTop="@dimen/dim_8_dp"
@@ -90,7 +90,7 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/imgAvatarCharacterDetails"
+                    android:id="@+id/imgAvatarCharacterDetail"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:contentDescription="@string/avatar_hero"
@@ -98,7 +98,7 @@
                     tools:src="@drawable/img1" />
 
                 <TextView
-                    android:id="@+id/txtDescriptionCharacterDetails"
+                    android:id="@+id/txtDescriptionCharacterDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
@@ -111,7 +111,7 @@
                     tools:text="@string/character_description" />
 
                 <TextView
-                    android:id="@+id/txtEventCharacterDetails"
+                    android:id="@+id/txtEventCharacterDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
@@ -124,12 +124,12 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerEventsCharacterDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/characterDetailsEventsList"/>
+                    android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/txtComicCharacterDetails"
+                    android:id="@+id/txtComicCharacterDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dim_8_dp"
@@ -142,9 +142,9 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerComicsCharacterDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/characterDetailsComicsList"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

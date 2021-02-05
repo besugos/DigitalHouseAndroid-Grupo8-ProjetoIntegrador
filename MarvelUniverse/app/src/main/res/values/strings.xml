@@ -79,5 +79,6 @@
     <string name="comic_title">Comic Title</string>
     <string name="comic_description">Comic Description</string>
     <string name="favorite_title">Favorite title</string>
+    <string name="favorite_description">Favorite description</string>
 
 </resources>

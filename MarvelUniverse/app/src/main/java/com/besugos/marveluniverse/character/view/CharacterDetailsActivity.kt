@@ -1,12 +1,15 @@
 package com.besugos.marveluniverse.character.view
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.drawToBitmap
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,19 +20,33 @@ import com.besugos.marveluniverse.data.room.MyDataBase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.repository.FavoriteRepository
 import com.besugos.marveluniverse.favorite.viewmodel.FavoriteViewModel
-import com.besugos.marveluniverse.favorite.viewmodel.SharedViewModel
 import com.besugos.marveluniverse.home.model.ComicSummaryModel
 import com.besugos.marveluniverse.home.model.EventSummaryModel
+import com.besugos.marveluniverse.utils.GlobalVariables.Companion.isToUpdateFavorites
+import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import java.io.File
+import java.io.FileOutputStream
 
 class CharacterDetailsActivity : AppCompatActivity() {
 
-    private lateinit var eventsAdapter: CharactersEventsAdapter
-    private lateinit var comicsAdapter: CharactersComicsAdapter
-    private lateinit var character: CharacterModel
+    private lateinit var auth: FirebaseAuth
 
-//    private val _sharedViewModel: SharedViewModel = null
+    private lateinit var _eventsAdapter: CharactersEventsAdapter
+    private lateinit var _comicsAdapter: CharactersComicsAdapter
+    private lateinit var _favoriteViewModel: FavoriteViewModel
+    private lateinit var _character: CharacterModel
 
+    private lateinit var txtTitleCharacterDetail: TextView
+    private lateinit var txtDescriptionCharacterDetail: TextView
+    private lateinit var imgAvatarCharacterDetail: ImageView
+    private lateinit var btnFavCharacterDetail: ImageButton
+    private lateinit var btnShareCharacterDetail: ImageButton
+    private lateinit var txtEventCharacterDetail: TextView
+    private lateinit var txtComicCharacterDetail: TextView
+    private lateinit var recyclerEventsCharacterDetail: RecyclerView
+    private lateinit var recyclerComicsCharacterDetail: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,76 +54,144 @@ class CharacterDetailsActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        character = intent.getParcelableExtra<CharacterModel>("Character")!!
+        auth = FirebaseAuth.getInstance()
+        _character = intent.getParcelableExtra("Character")!!
 
-        val characterName = this.findViewById<TextView>(R.id.txtNameCharacterDetails)
-        characterName.text = character.name
+        initializeViews()
+        initializeBasicsDataIntoViews()
+        initializeFavoriteViewModel()
+        initializeEventsRecycler()
+        initializeComicsRecycler()
+        btnFavCharacterDetailOnClick()
+        btnShareCharacterDetailOnClick()
 
-        val characterDescription =
-            this.findViewById<TextView>(R.id.txtDescriptionCharacterDetails)
-        characterDescription.text =
-            if (character.description.isNullOrEmpty()) {
-                this.getText(R.string.character_description_not_found)
-            } else character.description
+    }
 
-        val imgHero = this.findViewById<ImageView>(R.id.imgAvatarCharacterDetails)
+    private fun initializeViews() {
+
+        txtTitleCharacterDetail = findViewById(R.id.txtTitleCharacterDetail)
+        txtDescriptionCharacterDetail  = findViewById(R.id.txtDescriptionCharacterDetail)
+        imgAvatarCharacterDetail = findViewById(R.id.imgAvatarCharacterDetail)
+        btnFavCharacterDetail = findViewById(R.id.btnFavCharacterDetail)
+        btnShareCharacterDetail = findViewById(R.id.btnShareCharacterDetail)
+        txtEventCharacterDetail = findViewById(R.id.txtEventCharacterDetail)
+        txtComicCharacterDetail = findViewById(R.id.txtComicCharacterDetail)
+        recyclerEventsCharacterDetail = findViewById(R.id.recyclerEventsCharacterDetail)
+        recyclerComicsCharacterDetail = findViewById(R.id.recyclerComicsCharacterDetail)
+
+    }
+
+    private fun initializeBasicsDataIntoViews() {
+        txtTitleCharacterDetail.text = _character.name
+        txtDescriptionCharacterDetail.text = if (_character.description.isNullOrEmpty()) {
+            getText(R.string.character_description_not_found)
+        } else _character.description
         Picasso.get()
-            .load(character.thumbnail!!.getThumb("standard_fantastic"))
-            .into(imgHero)
+            .load(_character.thumbnail!!.getThumb("standard_fantastic"))
+            .into(imgAvatarCharacterDetail)
+    }
 
-        val recyclerViewEvents =
-            this.findViewById<RecyclerView>(R.id.characterDetailsEventsList)
+    private fun initializeFavoriteViewModel() {
+
+        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModel.FavoriteViewModelFactory(
+                FavoriteRepository(MyDataBase.getDataBaseClient(this).favoriteDAO())
+            )
+        ).get(FavoriteViewModel::class.java)
+        _favoriteViewModel.getFavoriteById(_character.id!!).observe(this, Observer {
+            _character.fav = it != null
+
+            btnFavCharacterDetail.setBackgroundResource(
+                if (_character.fav) R.drawable.ic_baseline_favorite_24
+                else R.drawable.ic_baseline_favorite_border_24
+            )
+
+        })
+
+    }
+
+    private fun initializeEventsRecycler() {
+
         val eventsManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        val listEvents = mutableListOf<EventSummaryModel>()
-        val eventsDetails = character.events?.items
-        eventsDetails?.forEach() {
-            listEvents.add(it)
-        }
+        val events = mutableListOf<EventSummaryModel>()
+        val eventsDetails = _character.events?.items
+        eventsDetails?.forEach { events.add(it) }
 
-        if (listEvents.isNullOrEmpty()) {
-            val txtEvent = this.findViewById<TextView>(R.id.txtEventCharacterDetails)
-            txtEvent.visibility = View.GONE
-        }
+        if (events.isNullOrEmpty()) txtEventCharacterDetail.visibility = View.GONE
 
-        eventsAdapter = CharactersEventsAdapter(listEvents)
+        _eventsAdapter = CharactersEventsAdapter(events)
 
-        recyclerViewEvents?.apply {
+        recyclerEventsCharacterDetail.apply {
             setHasFixedSize(true)
             layoutManager = eventsManager
-            adapter = eventsAdapter
+            adapter = _eventsAdapter
         }
 
-        val recyclerViewComics =
-            this.findViewById<RecyclerView>(R.id.characterDetailsComicsList)
+    }
+
+    private fun initializeComicsRecycler() {
+
         val comicsManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        val listComics = mutableListOf<ComicSummaryModel>()
-        val comicsDetails = character.comics?.items
-        listComics.clear()
-        comicsDetails?.forEach() {
-            listComics.add(it)
-        }
+        val comics = mutableListOf<ComicSummaryModel>()
+        val comicsDetails = _character.comics?.items
+        comics.clear()
+        comicsDetails?.forEach { comics.add(it) }
 
-        if (listComics.isNullOrEmpty()) {
-            val txtComic = this.findViewById<TextView>(R.id.txtComicCharacterDetails)
-            txtComic.visibility = View.GONE
-        }
+        if (comics.isNullOrEmpty()) txtComicCharacterDetail.visibility = View.GONE
 
-        comicsAdapter = CharactersComicsAdapter(listComics)
+        _comicsAdapter = CharactersComicsAdapter(comics)
 
-        recyclerViewComics?.apply {
+        recyclerComicsCharacterDetail.apply {
             setHasFixedSize(true)
             layoutManager = comicsManager
-            adapter = eventsAdapter
+            adapter = _comicsAdapter
         }
 
-        findViewById<ImageButton>(R.id.btnShareCharacter).setOnClickListener{
-            val wikiUrl = character.urls?.first { it.type == "wiki" }
+    }
+
+    private fun btnFavCharacterDetailOnClick() {
+
+        btnFavCharacterDetail.setOnClickListener {
+
+            _character.fav = !_character.fav
+            if (_character.fav) {
+
+                _favoriteViewModel.insertFavorite(getFavoriteModelToSave()).observe(
+                    this, Observer { wasUnlocked ->
+                        if (wasUnlocked) {
+                            btnFavCharacterDetail.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                            isToUpdateFavorites = true
+                        }
+                    }
+                )
+
+            } else {
+
+                _favoriteViewModel.removeFavorite(_character.id!!).observe(
+                    this, Observer { wasUnlocked ->
+                        if (wasUnlocked) {
+                            btnFavCharacterDetail.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+                            isToUpdateFavorites = true
+                        }
+                    }
+                )
+
+            }
+        }
+
+    }
+
+    private fun btnShareCharacterDetailOnClick() {
+
+        btnShareCharacterDetail.setOnClickListener{
+            val wikiUrl = _character.urls?.first { it.type == "wiki" }
             val url = wikiUrl?.url
-                ?: ((character.urls?.first { it.type == "detail" } ?: "https://www.marvel.com") as String)
+                ?: ((_character.urls?.first { it.type == "detail" } ?: "https://www.marvel.com") as String)
 
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
@@ -117,59 +202,43 @@ class CharacterDetailsActivity : AppCompatActivity() {
 
         }
 
+    }
 
-        val btnToggleFavorite = this.findViewById<ImageButton>(R.id.btnToggleFavorite)
+    private fun getFavoriteModelToSave(): FavoriteModel {
 
-        val favoriteModel = FavoriteModel(
-            character.id!!,
-            character.name,
-            character.description,
-            character.thumbnail!!.path,
-            character.thumbnail!!.extension
-        )
+        var path = ""
+        val bitmap = imgAvatarCharacterDetail.drawToBitmap()
 
-        val favoriteViewModel = ViewModelProvider(
-            this,
-            FavoriteViewModel.FavoriteViewModelFactory(
-                FavoriteRepository(MyDataBase.getDataBaseClient(this).favoriteDAO())
-            )
-        ).get(FavoriteViewModel::class.java)
-        favoriteViewModel.getFavoriteById(favoriteModel.id).observe(this, Observer {
-            character.fav = it != null
-
-            btnToggleFavorite.setBackgroundResource(
-                if (character.fav) R.drawable.ic_baseline_favorite_24
-                else R.drawable.ic_baseline_favorite_border_24
-            )
-
-        })
-
-        btnToggleFavorite.setOnClickListener {
-            character.fav = !character.fav
-            if (character.fav) {
-                favoriteViewModel.insertFavorite(favoriteModel).observe(
-                    this, Observer { wasUnlocked ->
-                        if (wasUnlocked) {
-                            btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
-//                            favoritesInsertDispatcher()
-                        }
-                    }
-                )
-            } else {
-                favoriteViewModel.removeFavorite(favoriteModel).observe(
-                    this, Observer { wasUnlocked ->
-                        if (wasUnlocked) {
-                            btnToggleFavorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
-//                            favoritesInsertDispatcher()
-                        }
-                    }
-                )
-            }
+        try {
+            var file = this.getDir("Images", Context.MODE_PRIVATE)
+            file = File(file, "img_${_character.id!!}.jpg")
+            val out = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)
+            out.flush()
+            out.close()
+            path = file.path
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
+        val events = if(!_character.events?.items.isNullOrEmpty()) {
+            Gson().toJson(_character.events!!.items)
+        } else ""
+
+        val comics = if(!_character.comics?.items.isNullOrEmpty()) {
+            Gson().toJson(_character.comics!!.items)
+        } else ""
+
+        return FavoriteModel(
+            _character.id!!,
+            auth.currentUser!!.uid,
+            _character.name,
+            _character.description,
+            path,
+            events,
+            comics
+        )
 
     }
-//    private fun favoritesInsertDispatcher() {
-//        _sharedViewModel.setFlag()
-//    }
+
 }

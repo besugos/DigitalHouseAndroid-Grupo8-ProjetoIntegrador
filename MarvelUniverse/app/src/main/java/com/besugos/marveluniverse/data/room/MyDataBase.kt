@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.besugos.marveluniverse.favorite.model.FavoriteModel
 import com.besugos.marveluniverse.favorite.room.FavoriteDAO
 
-@Database(entities = [FavoriteModel::class], version = 3)
+@Database(entities = [FavoriteModel::class], version = 4)
 abstract class MyDataBase: RoomDatabase() {
 
     abstract fun favoriteDAO(): FavoriteDAO
