@@ -1,31 +1,22 @@
 package com.besugos.marveluniverse.event.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besugos.marveluniverse.R
-import com.besugos.marveluniverse.character.view.CharactersComicsAdapter
-import com.besugos.marveluniverse.character.view.CharactersEventsAdapter
 import com.besugos.marveluniverse.event.model.EventModel
 import com.besugos.marveluniverse.event.repository.EventRepository
 import com.besugos.marveluniverse.event.viewmodel.EventViewModel
-import com.besugos.marveluniverse.home.model.CharacterSummaryModel
-import com.besugos.marveluniverse.home.model.ComicSummaryModel
-import com.besugos.marveluniverse.home.model.EventSummaryModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.squareup.picasso.Picasso
 
 
 class EventsFragment : Fragment() {
@@ -33,8 +24,6 @@ class EventsFragment : Fragment() {
     private lateinit var _adapter: EventAdapter
     private lateinit var _viewModel: EventViewModel
     private lateinit var _view: View
-    private lateinit var characterAdapter: EventCharactersAdapter
-    private lateinit var comicsAdapter: EventComicAdapter
 
     private var _searchByName: String? = null
     private var _totalItemCountAux = 0
@@ -85,7 +74,8 @@ class EventsFragment : Fragment() {
         ).get(EventViewModel::class.java)
 
         _viewModel.getEvents().observe(viewLifecycleOwner, Observer {
-            showResult(it)
+            if(it != null) showResult(it.data.results)
+            else offlineUser(true)
         })
 
     }
@@ -95,6 +85,7 @@ class EventsFragment : Fragment() {
         list?.let { _listEvent.addAll(it) }
         listNotFound(_listEvent.isEmpty())
         _adapter.notifyDataSetChanged()
+        offlineUser(false)
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -118,7 +109,8 @@ class EventsFragment : Fragment() {
 
                 _viewModel.getEvents(_searchByName).observe(viewLifecycleOwner, Observer {
                     _listEvent.clear()
-                    showResult(it)
+                    if(it != null) showResult(it.data.results)
+                    else offlineUser(true)
                 })
 
                 return false
@@ -155,7 +147,8 @@ class EventsFragment : Fragment() {
                     _wasTheLastPageReturned = true
                     _totalItemCountAux = totalItemCount
                     _viewModel.nextPage(_searchByName).observe(viewLifecycleOwner, Observer {
-                        showResult(it)
+                        if(it != null) showResult(it.data.results)
+                        else offlineUser(true)
                     })
                 }
 
@@ -169,6 +162,13 @@ class EventsFragment : Fragment() {
         } else {
             _view.findViewById<View>(R.id.layoutNotFound).visibility = View.GONE
         }
+    }
+
+    private fun offlineUser(isOffline: Boolean) {
+        _view.findViewById<LinearLayout>(R.id.layoutNotNetwork).visibility = if(isOffline){
+            View.VISIBLE
+        } else View.GONE
+        showLoading(false)
     }
 }
 

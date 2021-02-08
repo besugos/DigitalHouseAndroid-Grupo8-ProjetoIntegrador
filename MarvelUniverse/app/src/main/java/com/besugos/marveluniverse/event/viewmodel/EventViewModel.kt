@@ -3,9 +3,11 @@ package com.besugos.marveluniverse.event.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
+import com.besugos.marveluniverse.data.model.ResponseModel
 import com.besugos.marveluniverse.event.model.EventModel
 import com.besugos.marveluniverse.event.repository.EventRepository
 import kotlinx.coroutines.Dispatchers
+import java.lang.Exception
 
 @Suppress("UNCHECKED_CAST")
 class EventViewModel(
@@ -20,24 +22,9 @@ class EventViewModel(
 
     fun getEvents(search: String? = null) = liveData(Dispatchers.IO) {
         val isSearchByName = !search.isNullOrEmpty()
-        val response = repository.getEvents(search)
-        _offset = response.data.offset + response.data.count
-
-        if(isSearchByName){
-            _hasNextPageSearchByName = _offset < response.data.total
-        } else {
-            _hasNextPage = _offset < response.data.total
-            _events.addAll(response.data.results)
-        }
-
-        emit(response.data.results)
-    }
-
-    fun nextPage(search: String? = null) = liveData(Dispatchers.IO) {
-        val isSearchByName = !search.isNullOrEmpty()
-        if( (isSearchByName && _hasNextPageSearchByName) || (!isSearchByName && _hasNextPage) ) {
-
-            val response = repository.getEvents(search, _offset)
+        var response: ResponseModel<EventModel>? = null
+        try{
+            response = repository.getEvents(search)
             _offset = response.data.offset + response.data.count
 
             if(isSearchByName){
@@ -46,19 +33,36 @@ class EventViewModel(
                 _hasNextPage = _offset < response.data.total
                 _events.addAll(response.data.results)
             }
+        } catch(e: Exception){}
 
-            emit(response.data.results)
+        emit(response)
+    }
+
+    fun nextPage(search: String? = null) = liveData(Dispatchers.IO) {
+        val isSearchByName = !search.isNullOrEmpty()
+        var response: ResponseModel<EventModel>? = null
+        if( (isSearchByName && _hasNextPageSearchByName) || (!isSearchByName && _hasNextPage) ) {
+
+            try {
+
+                response = repository.getEvents(search, _offset)
+                _offset = response.data.offset + response.data.count
+
+                if (isSearchByName) {
+                    _hasNextPageSearchByName = _offset < response.data.total
+                } else {
+                    _hasNextPage = _offset < response.data.total
+                    _events.addAll(response.data.results)
+                }
+
+            } catch(e: Exception){}
+            emit(response)
         }
     }
 
     fun getLocalEvents(): List<EventModel> {
         _offset = _events.size
         return _events
-    }
-
-    fun getEventById(id: Int) = liveData(Dispatchers.IO) {
-        val response = repository.getEventById(id)
-        emit(response.data.results)
     }
 
     class EventViewModelFactory(
