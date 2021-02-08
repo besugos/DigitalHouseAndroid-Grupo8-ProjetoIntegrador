@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -75,7 +76,8 @@ class CharactersFragment : Fragment() {
         ).get(CharacterViewModel::class.java)
 
         _characterViewModel.getCharacters().observe(viewLifecycleOwner, Observer {
-            showResult(it)
+            if(it != null) showResult(it.data.results)
+            offlineUser(true)
         })
 
     }
@@ -84,6 +86,7 @@ class CharactersFragment : Fragment() {
         showLoading(false)
         list?.let { _listCharacters.addAll(it) }
         listNotFound(_listCharacters.isEmpty())
+        offlineUser(false)
         _adapter.notifyDataSetChanged()
     }
 
@@ -109,7 +112,9 @@ class CharactersFragment : Fragment() {
                 _characterViewModel.getCharacters(_searchByName)
                     .observe(viewLifecycleOwner, Observer {
                         _listCharacters.clear()
-                        showResult(it)
+                        if(it != null) showResult(it.data.results)
+                        else offlineUser(true)
+
                     })
 
                 return false
@@ -147,7 +152,7 @@ class CharactersFragment : Fragment() {
                     _totalItemCountAux = totalItemCount
                     _characterViewModel.nextPage(_searchByName)
                         .observe(viewLifecycleOwner, Observer {
-                            showResult(it)
+                            if(it != null) showResult(it.data.results)
                         })
                 }
 
@@ -163,8 +168,11 @@ class CharactersFragment : Fragment() {
         }
     }
 
-
-
-
+    private fun offlineUser(isOffline: Boolean) {
+        _myView.findViewById<LinearLayout>(R.id.layoutNotNetwork).visibility = if(isOffline){
+            View.VISIBLE
+        } else View.GONE
+        showLoading(false)
+    }
 
 }

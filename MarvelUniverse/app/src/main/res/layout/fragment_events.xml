@@ -91,4 +91,36 @@
             android:text="@string/ops_nothing_found"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutNotNetwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="@dimen/dim_200_dp"
+            android:layout_height="@dimen/dim_200_dp"
+            android:src="@drawable/ic_baseline_wifi_off_24"
+            android:contentDescription="@string/not_found_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dim_15_dp"
+            android:textSize="@dimen/dim_20_sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorMarvelRed"
+            android:text="@string/ops_you_re_offline"/>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
