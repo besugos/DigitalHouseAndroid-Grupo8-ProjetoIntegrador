@@ -44,6 +44,7 @@ class ComicsFragment : Fragment() {
         _myView = view
         initialSearch()
         showLoading(true)
+        offlineUser(false)
         initSearchView()
         setScrollView()
 
@@ -119,7 +120,9 @@ class ComicsFragment : Fragment() {
                 if (newText.isNullOrEmpty()) {
                     _comics.clear()
                     _searchByName = null
-                    showResult(_viewModel.getLocalComics())
+                    if(_myView.findViewById<LinearLayout>(R.id.layoutNotNetwork).visibility == View.GONE) {
+                        showResult(_viewModel.getLocalComics())
+                    }
                 }
 
                 return true
@@ -168,6 +171,7 @@ class ComicsFragment : Fragment() {
             View.VISIBLE
         } else View.GONE
         showLoading(false)
+        listNotFound(false)
     }
 
 }

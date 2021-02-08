@@ -46,6 +46,7 @@ class CharactersFragment : Fragment() {
         _myView = view
         initialSearch()
         showLoading(true)
+        offlineUser(false)
         initSearchView()
         setScrollView()
 
@@ -77,7 +78,7 @@ class CharactersFragment : Fragment() {
 
         _characterViewModel.getCharacters().observe(viewLifecycleOwner, Observer {
             if(it != null) showResult(it.data.results)
-            offlineUser(true)
+            else offlineUser(true)
         })
 
     }
@@ -124,7 +125,9 @@ class CharactersFragment : Fragment() {
                 if (newText.isNullOrEmpty()) {
                     _listCharacters.clear()
                     _searchByName = null
-                    showResult(_characterViewModel.getLocalCharacters())
+                    if(_myView.findViewById<LinearLayout>(R.id.layoutNotNetwork).visibility == View.GONE) {
+                        showResult(_characterViewModel.getLocalCharacters())
+                    }
                 }
 
                 return true
@@ -173,6 +176,7 @@ class CharactersFragment : Fragment() {
             View.VISIBLE
         } else View.GONE
         showLoading(false)
+        listNotFound(false)
     }
 
 }

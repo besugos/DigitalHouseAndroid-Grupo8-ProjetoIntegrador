@@ -45,6 +45,7 @@ class EventsFragment : Fragment() {
         _view = view
         initialSearch()
         showLoading(true)
+        offlineUser(false)
         initSearchView()
         setScrollView()
 
@@ -120,7 +121,9 @@ class EventsFragment : Fragment() {
                 if (newText.isNullOrEmpty()) {
                     _listEvent.clear()
                     _searchByName = null
-                    showResult(_viewModel.getLocalEvents())
+                    if(_view.findViewById<LinearLayout>(R.id.layoutNotNetwork).visibility == View.GONE) {
+                        showResult(_viewModel.getLocalEvents())
+                    }
                 }
 
                 return true
@@ -169,6 +172,7 @@ class EventsFragment : Fragment() {
             View.VISIBLE
         } else View.GONE
         showLoading(false)
+        listNotFound(false)
     }
 }
 
